@@ -1,0 +1,26 @@
+// https://nuxt.com/docs/api/configuration/nuxt-config
+export default defineNuxtConfig({
+  devtools: { enabled: false },
+  app: {
+    pageTransition: { name: "page", mode: "out-in" },
+    layoutTransition: { name: "layout", mode: "out-in" },
+  },
+  css: ["~/assets/css/main.css"],
+  modules: ["nuxt-primevue", "@samk-dev/nuxt-vcalendar"],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
+  primevue: {
+    usePrimeVue: true,
+    cssLayerOrder: "tailwind-base, primevue, tailwind-utilities",
+    components: {
+      include: "*",
+    },
+  },
+  nitro: {
+    plugins: ["~/server/index.ts"],
+  },
+});
