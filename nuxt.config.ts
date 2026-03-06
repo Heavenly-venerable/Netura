@@ -51,7 +51,7 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#f59e0b' }
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'icon', type: 'image/png', href: 'https://psmk.jabarprov.go.id/_next/image?url=https%3A%2F%2Fpsmk.jabarprov.go.id%2Fstorage%2Fimage%2FlwQIeD1Ocmyc9h71q7BWxw15blFhXtpb8eL0Ggxy.jpg&w=750&q=75' },
         { rel: 'canonical', href: 'https://smkn1arahan.sch.id' },
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }
       ]
