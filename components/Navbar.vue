@@ -1,26 +1,4 @@
 <script setup lang="ts">
-//import type { Ref } from "vue";
-//import type { RouteLocationRaw } from "vue-router";
-//import { useDynamicDropdowns } from "../composable/useDynamicDropdowns";
-
-//const dropdownIds = ["profile", "ppdb", "program"];
-//const { profile, ppdb, program, toggleDropdown } =
-//  useDynamicDropdowns(dropdownIds);
-
-/*
-interface Item {
-  label: string;
-  url?: RouteLocationRaw;
-  items?: Item[];
-}
-*/
-
-/*
-interface DropdownStates {
-  [key: string]: boolean;
-}
-*/
-
 const route = useRoute();
 const showSidebar = ref(false);
 const authToken = useCookie("auth");
@@ -75,155 +53,141 @@ watch(
   },
 );
 
+// Simplified click outside handler
 onMounted(() => {
-  window.addEventListener("click", (e: MouseEvent) => {
-    const sb: Element | null = document.querySelector("#sidebar-button");
-    const cs: Element | null = document.querySelector("#containerSidebar");
-    const sidebar: Element | null = document.querySelector("#sidebar");
-    const target: Element = e.target as Element;
+  const handleClickOutside = (e: MouseEvent) => {
+    if (!showSidebar.value) return;
 
-    if (
-      !sb?.contains(target) &&
-      !sidebar?.contains(target) &&
-      !cs?.contains(target)
-    ) {
+    const target = e.target as Element;
+    const sidebar = document.querySelector("#sidebar");
+    const button = document.querySelector("#sidebar-button");
+
+    if (!sidebar?.contains(target) && !button?.contains(target)) {
       showSidebar.value = false;
     }
-  });
-});
+  };
 
-onUnmounted(() => {
-  window.removeEventListener("click", () => {});
+  document.addEventListener("click", handleClickOutside);
+
+  onUnmounted(() => {
+    document.removeEventListener("click", handleClickOutside);
+  });
 });
 </script>
 
 <template>
-  <nav
-    class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 md:px-4 md:py-4"
-  >
-    <div class="px-3 py-3 md:px-5 md:pl-3">
-      <div class="flex items-center justify-between">
-        <NuxtLink to="/" class="flex items-center md:me-24">
-          <img
-            class="h-10 w-10 self-center mr-3"
-            src="https://gcdnb.pbrd.co/images/E9Mqu6OOLeDv.png?o=1"
-            alt=""
-          />
-          <span
-            class="text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white"
-            >NETURA</span
-          >
+  <!-- Navbar - Minimalis tanpa border bottom -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 px-4">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <NuxtLink to="/" class="flex items-center gap-2">
+        <img class="h-8 w-8" src="https://psmk.jabarprov.go.id/_next/image?url=https%3A%2F%2Fpsmk.jabarprov.go.id%2Fstorage%2Fimage%2FlwQIeD1Ocmyc9h71q7BWxw15blFhXtpb8eL0Ggxy.jpg&w=750&q=75" alt="NETURA" />
+        <span class="text-lg font-medium dark:text-white">NETURA</span>
+      </NuxtLink>
+
+      <!-- Right Section -->
+      <div class="flex items-center gap-2">
+        <!-- Login/Dashboard Button - Minimalis -->
+        <NuxtLink v-if="!authToken" to="/login"
+          class="px-3 py-1.5 text-sm text-amber-600 border border-amber-200 rounded-md hover:bg-amber-50 dark:text-amber-400 dark:border-amber-800 dark:hover:bg-amber-900/30 transition-colors">
+          Login
         </NuxtLink>
-        <div class="flex items-center gap-x-2">
-          <div>
-            <NuxtLink
-              v-if="!authToken"
-              to="/login"
-              class="text-white bg-amber-500 hover:bg-amber-800 focus:ring-4 focus:ring-amber-300 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-amber-600 dark:hover:bg-amber-700 focus:outline-none dark:focus:ring-amber-800"
-            >
-              Login
-            </NuxtLink>
-            <NuxtLink
-              v-else
-              to="/protected/dashboard"
-              class="text-white bg-amber-500 hover:bg-amber-800 focus:ring-4 focus:ring-amber-300 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-amber-600 dark:hover:bg-amber-700 focus:outline-none dark:focus:ring-amber-800"
-            >
-              Dashboard
-            </NuxtLink>
-          </div>
-          <button
-            @click="showSidebar = !showSidebar"
-            id="sidebar-button"
-            data-drawer-target="logo-sidebar"
-            data-drawer-toggle="logo-sidebar"
-            aria-controls="logo-sidebar"
-            type="button"
-            class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-          >
-            <span class="sr-only">Open sidebar</span>
-            <svg
-              class="w-6 h-6"
-              aria-hidden="true"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                clip-rule="evenodd"
-                fill-rule="evenodd"
-                d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-              ></path>
-            </svg>
-          </button>
-        </div>
+        <NuxtLink v-else to="/protected/dashboard"
+          class="px-3 py-1.5 text-sm text-amber-600 border border-amber-200 rounded-md hover:bg-amber-50 dark:text-amber-400 dark:border-amber-800 dark:hover:bg-amber-900/30 transition-colors">
+          Dashboard
+        </NuxtLink>
+
+        <!-- Menu Button - Minimalis -->
+        <button @click="showSidebar = !showSidebar" id="sidebar-button" type="button"
+          class="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+          :class="{ 'text-gray-900 dark:text-white': showSidebar }">
+          <span class="sr-only">Open menu</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path v-if="!showSidebar" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M4 6h16M4 12h16M4 18h16" />
+            <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
       </div>
     </div>
   </nav>
 
-  <aside
-    v-if="showSidebar"
-    id="logo-sidebar sidebar"
-    class="fixed top-0 md:top-10 right-0 z-40 w-64 md:w-full h-screen md:h-auto pt-20 transition-transform bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
-    aria-label="Sidebar"
-  >
-    <div
-      id="containerSidebar"
-      class="h-full px-3 pb-24 md:pb-4 overflow-y-auto bg-white dark:bg-gray-800"
-    >
-      <ul class="space-y-2 font-medium">
-        <li v-for="item in items">
-          <div v-if="!item.items">
-            <NuxtLink
-              :to="item.url!"
-              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-            >
-              <span class="ms-3">{{ item.label }}</span>
+  <!-- Sidebar - Minimalis tanpa shadow -->
+  <Transition enter-active-class="transition duration-200 ease-out" enter-from-class="opacity-0 translate-x-full"
+    enter-to-class="opacity-100 translate-x-0" leave-active-class="transition duration-150 ease-in"
+    leave-from-class="opacity-100 translate-x-0" leave-to-class="opacity-0 translate-x-full">
+    <aside v-if="showSidebar" id="sidebar"
+      class="fixed top-16 right-0 bottom-0 z-40 w-64 bg-white dark:bg-gray-900 border-l border-gray-100 dark:border-gray-800">
+      <div class="h-full px-3 py-4 overflow-y-auto">
+        <ul class="space-y-1">
+          <li v-for="item in items" :key="item.label">
+            <!-- Single Item -->
+            <NuxtLink v-if="!item.items" :to="item.url!"
+              class="flex items-center px-3 py-2 text-sm text-gray-700 rounded-md hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800 transition-colors"
+              :class="{ 'bg-gray-50 dark:bg-gray-800': $route.path === item.url }">
+              {{ item.label }}
             </NuxtLink>
-          </div>
-          <div v-else-if="item.items">
-            <button
-              @click="toggleDropdown(item.label)"
-              type="button"
-              class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-              aria-controls="dropdown-example"
-              data-collapse-toggle="dropdown-example"
-            >
-              <span
-                class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap"
-                >{{ item.label }}</span
-              >
-              <svg
-                class="w-3 h-3"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 10 6"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="m1 1 4 4 4-4"
-                />
-              </svg>
-            </button>
-            <ul
-              v-show="dropdownStates[item.label]"
-              id="dropdown-example"
-              class="py-2 space-y-2"
-            >
-              <li v-for="subItem in item.items">
-                <NuxtLink
-                  :to="subItem.url!"
-                  class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                  >{{ subItem.label }}</NuxtLink
-                >
-              </li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </aside>
+
+            <!-- Dropdown Item -->
+            <div v-else>
+              <button @click="toggleDropdown(item.label)"
+                class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-700 rounded-md hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800 transition-colors">
+                <span>{{ item.label }}</span>
+                <svg class="w-4 h-4 transition-transform duration-200"
+                  :class="{ 'rotate-180': dropdownStates[item.label] }" fill="none" stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              <!-- Submenu -->
+              <Transition enter-active-class="transition-all duration-200 ease-out"
+                enter-from-class="opacity-0 -translate-y-2" enter-to-class="opacity-100 translate-y-0"
+                leave-active-class="transition-all duration-150 ease-in" leave-from-class="opacity-100 translate-y-0"
+                leave-to-class="opacity-0 -translate-y-2">
+                <ul v-if="dropdownStates[item.label]" class="mt-1 ml-4 space-y-1">
+                  <li v-for="subItem in item.items" :key="subItem.label">
+                    <NuxtLink :to="subItem.url!"
+                      class="block px-3 py-2 text-sm text-gray-600 rounded-md hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800 transition-colors"
+                      :class="{ 'bg-gray-50 dark:bg-gray-800': $route.path === subItem.url }">
+                      {{ subItem.label }}
+                    </NuxtLink>
+                  </li>
+                </ul>
+              </Transition>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </aside>
+  </Transition>
 </template>
+
+<style scoped>
+/* Smooth scrolling for sidebar */
+#sidebar {
+  scrollbar-width: thin;
+  scrollbar-color: #e5e7eb #f9fafb;
+}
+
+#sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+#sidebar::-webkit-scrollbar-track {
+  background: #f9fafb;
+}
+
+#sidebar::-webkit-scrollbar-thumb {
+  background-color: #e5e7eb;
+  border-radius: 20px;
+}
+
+.dark #sidebar::-webkit-scrollbar-track {
+  background: #111827;
+}
+
+.dark #sidebar::-webkit-scrollbar-thumb {
+  background-color: #374151;
+}
+</style>

@@ -1,263 +1,313 @@
 <template>
-  <div class="card flex justify-content-center">
-    <Sidebar v-model:visible="visible">
+  <div>
+    <!-- Hamburger Button -->
+    <Button 
+      icon="pi pi-bars" 
+      @click="visible = true"
+      class="p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white bg-transparent border-none"
+      aria-label="Menu"
+    />
+
+    <Sidebar 
+      v-model:visible="visible"
+      position="left"
+      :showCloseIcon="false"
+      :dismissable="true"
+      class="w-80 md:w-96 bg-white dark:bg-gray-900 border-r border-gray-100 dark:border-gray-800"
+    >
       <template #container="{ closeCallback }">
-        <div class="flex flex-column h-full">
-          <div
-            class="flex align-items-center justify-content-between px-4 pt-3 flex-shrink-0"
-          >
-            <span class="inline-flex align-items-center gap-2">
-              <svg
-                width="35"
-                height="40"
-                viewBox="0 0 35 40"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M25.87 18.05L23.16 17.45L25.27 20.46V29.78L32.49 23.76V13.53L29.18 14.73L25.87 18.04V18.05ZM25.27 35.49L29.18 31.58V27.67L25.27 30.98V35.49ZM20.16 17.14H20.03H20.17H20.16ZM30.1 5.19L34.89 4.81L33.08 12.33L24.1 15.67L30.08 5.2L30.1 5.19ZM5.72 14.74L2.41 13.54V23.77L9.63 29.79V20.47L11.74 17.46L9.03 18.06L5.72 14.75V14.74ZM9.63 30.98L5.72 27.67V31.58L9.63 35.49V30.98ZM4.8 5.2L10.78 15.67L1.81 12.33L0 4.81L4.79 5.19L4.8 5.2ZM24.37 21.05V34.59L22.56 37.29L20.46 39.4H14.44L12.34 37.29L10.53 34.59V21.05L12.42 18.23L17.45 26.8L22.48 18.23L24.37 21.05ZM22.85 0L22.57 0.69L17.45 13.08L12.33 0.69L12.05 0H22.85Z"
-                  fill="var(--primary-color)"
-                />
-                <path
-                  d="M30.69 4.21L24.37 4.81L22.57 0.69L22.86 0H26.48L30.69 4.21ZM23.75 5.67L22.66 3.08L18.05 14.24V17.14H19.7H20.03H20.16H20.2L24.1 15.7L30.11 5.19L23.75 5.67ZM4.21002 4.21L10.53 4.81L12.33 0.69L12.05 0H8.43002L4.22002 4.21H4.21002ZM21.9 17.4L20.6 18.2H14.3L13 17.4L12.4 18.2L12.42 18.23L17.45 26.8L22.48 18.23L22.5 18.2L21.9 17.4ZM4.79002 5.19L10.8 15.7L14.7 17.14H14.74H15.2H16.85V14.24L12.24 3.09L11.15 5.68L4.79002 5.2V5.19Z"
-                  fill="var(--text-color)"
-                />
+        <div class="flex flex-col h-full">
+          <!-- Header -->
+          <div class="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-gray-800">
+            <!-- Logo -->
+            <NuxtLink to="/" class="flex items-center gap-2">
+              <img 
+                src="https://gcdnb.pbrd.co/images/E9Mqu6OOLeDv.png?o=1" 
+                alt="NETURA"
+                class="h-8 w-8"
+              />
+              <span class="font-medium text-gray-900 dark:text-white">NETURA</span>
+            </NuxtLink>
+
+            <!-- Close Button -->
+            <button
+              @click="closeCallback"
+              class="p-1 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors"
+              aria-label="Close menu"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
               </svg>
-              <span class="font-semibold text-2xl text-primary">Your Logo</span>
-            </span>
-            <span>
-              <Button
-                type="button"
-                @click="closeCallback"
-                icon="pi pi-times"
-                rounded
-                outlined
-                class="h-2rem w-2rem"
-              ></Button>
-            </span>
+            </button>
           </div>
-          <div class="overflow-y-auto">
-            <ul class="list-none p-3 m-0">
-              <li>
-                <div
-                  v-ripple
-                  v-styleclass="{
-                    selector: '@next',
-                    enterClass: 'hidden',
-                    enterActiveClass: 'slidedown',
-                    leaveToClass: 'hidden',
-                    leaveActiveClass: 'slideup',
-                  }"
-                  class="p-3 flex align-items-center justify-content-between text-600 cursor-pointer p-ripple"
+
+          <!-- Navigation -->
+          <div class="flex-1 overflow-y-auto py-4">
+            <!-- Main Navigation -->
+            <div class="px-3">
+              <p class="px-3 text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2">
+                Main Menu
+              </p>
+              <nav class="space-y-1">
+                <NuxtLink
+                  to="/dashboard"
+                  class="flex items-center gap-3 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                  :class="{ 'bg-gray-50 dark:bg-gray-800 text-amber-600 dark:text-amber-400': $route.path === '/dashboard' }"
                 >
-                  <span class="font-medium">FAVORITES</span>
-                  <i class="pi pi-chevron-down"></i>
-                </div>
-                <ul class="list-none p-0 m-0 overflow-hidden">
-                  <li>
-                    <a
-                      v-ripple
-                      class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                  <i class="pi pi-home text-base"></i>
+                  <span>Dashboard</span>
+                </NuxtLink>
+
+                <NuxtLink
+                  to="/bookmarks"
+                  class="flex items-center gap-3 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                >
+                  <i class="pi pi-bookmark text-base"></i>
+                  <span>Bookmarks</span>
+                </NuxtLink>
+
+                <!-- Reports with Submenu -->
+                <div>
+                  <button
+                    @click="toggleSubmenu('reports')"
+                    class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                  >
+                    <span class="flex items-center gap-3">
+                      <i class="pi pi-chart-line text-base"></i>
+                      <span>Reports</span>
+                    </span>
+                    <svg
+                      class="w-4 h-4 transition-transform duration-200"
+                      :class="{ 'rotate-180': openSubmenus.reports }"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
                     >
-                      <i class="pi pi-home mr-2"></i>
-                      <span class="font-medium">Dashboard</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      v-ripple
-                      class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
-                    >
-                      <i class="pi pi-bookmark mr-2"></i>
-                      <span class="font-medium">Bookmarks</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      v-ripple
-                      v-styleclass="{
-                        selector: '@next',
-                        enterClass: 'hidden',
-                        enterActiveClass: 'slidedown',
-                        leaveToClass: 'hidden',
-                        leaveActiveClass: 'slideup',
-                      }"
-                      class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
-                    >
-                      <i class="pi pi-chart-line mr-2"></i>
-                      <span class="font-medium">Reports</span>
-                      <i class="pi pi-chevron-down ml-auto"></i>
-                    </a>
-                    <ul
-                      class="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out"
-                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+
+                  <Transition
+                    enter-active-class="transition-all duration-200 ease-out"
+                    enter-from-class="opacity-0 -translate-y-2"
+                    enter-to-class="opacity-100 translate-y-0"
+                    leave-active-class="transition-all duration-150 ease-in"
+                    leave-from-class="opacity-100 translate-y-0"
+                    leave-to-class="opacity-0 -translate-y-2"
+                  >
+                    <ul v-if="openSubmenus.reports" class="mt-1 ml-6 space-y-1">
                       <li>
-                        <a
-                          v-ripple
-                          v-styleclass="{
-                            selector: '@next',
-                            enterClass: 'hidden',
-                            enterActiveClass: 'slidedown',
-                            leaveToClass: 'hidden',
-                            leaveActiveClass: 'slideup',
-                          }"
-                          class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                        <button
+                          @click="toggleSubmenu('revenue')"
+                          class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-400 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                         >
-                          <i class="pi pi-chart-line mr-2"></i>
-                          <span class="font-medium">Revenue</span>
-                          <i class="pi pi-chevron-down ml-auto"></i>
-                        </a>
-                        <ul
-                          class="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out"
+                          <span class="flex items-center gap-3">
+                            <i class="pi pi-chart-line text-sm"></i>
+                            <span>Revenue</span>
+                          </span>
+                          <svg
+                            class="w-4 h-4 transition-transform duration-200"
+                            :class="{ 'rotate-180': openSubmenus.revenue }"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </button>
+
+                        <Transition
+                          enter-active-class="transition-all duration-200 ease-out"
+                          enter-from-class="opacity-0 -translate-y-2"
+                          enter-to-class="opacity-100 translate-y-0"
+                          leave-active-class="transition-all duration-150 ease-in"
+                          leave-from-class="opacity-100 translate-y-0"
+                          leave-to-class="opacity-0 -translate-y-2"
                         >
-                          <li>
-                            <a
-                              v-ripple
-                              class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
-                            >
-                              <i class="pi pi-table mr-2"></i>
-                              <span class="font-medium">View</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              v-ripple
-                              class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
-                            >
-                              <i class="pi pi-search mr-2"></i>
-                              <span class="font-medium">Search</span>
-                            </a>
-                          </li>
-                        </ul>
+                          <ul v-if="openSubmenus.revenue" class="mt-1 ml-6 space-y-1">
+                            <li>
+                              <NuxtLink
+                                to="/reports/revenue/view"
+                                class="flex items-center gap-3 px-3 py-2 text-sm text-gray-600 dark:text-gray-400 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                              >
+                                <i class="pi pi-table text-sm"></i>
+                                <span>View</span>
+                              </NuxtLink>
+                            </li>
+                            <li>
+                              <NuxtLink
+                                to="/reports/revenue/search"
+                                class="flex items-center gap-3 px-3 py-2 text-sm text-gray-600 dark:text-gray-400 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                              >
+                                <i class="pi pi-search text-sm"></i>
+                                <span>Search</span>
+                              </NuxtLink>
+                            </li>
+                          </ul>
+                        </Transition>
                       </li>
                       <li>
-                        <a
-                          v-ripple
-                          class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                        <NuxtLink
+                          to="/reports/expenses"
+                          class="flex items-center gap-3 px-3 py-2 text-sm text-gray-600 dark:text-gray-400 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                         >
-                          <i class="pi pi-chart-line mr-2"></i>
-                          <span class="font-medium">Expenses</span>
-                        </a>
+                          <i class="pi pi-chart-line text-sm"></i>
+                          <span>Expenses</span>
+                        </NuxtLink>
                       </li>
                     </ul>
-                  </li>
-                  <li>
-                    <a
-                      v-ripple
-                      class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
-                    >
-                      <i class="pi pi-users mr-2"></i>
-                      <span class="font-medium">Team</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      v-ripple
-                      class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
-                    >
-                      <i class="pi pi-comments mr-2"></i>
-                      <span class="font-medium">Messages</span>
-                      <span
-                        class="inline-flex align-items-center justify-content-center ml-auto bg-primary border-circle"
-                        style="min-width: 1.5rem; height: 1.5rem"
-                        >3</span
-                      >
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      v-ripple
-                      class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
-                    >
-                      <i class="pi pi-calendar mr-2"></i>
-                      <span class="font-medium">Calendar</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      v-ripple
-                      class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
-                    >
-                      <i class="pi pi-cog mr-2"></i>
-                      <span class="font-medium">Settings</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <ul class="list-none p-3 m-0">
-              <li>
-                <div
-                  v-ripple
-                  v-styleclass="{
-                    selector: '@next',
-                    enterClass: 'hidden',
-                    enterActiveClass: 'slidedown',
-                    leaveToClass: 'hidden',
-                    leaveActiveClass: 'slideup',
-                  }"
-                  class="p-3 flex align-items-center justify-content-between text-600 cursor-pointer p-ripple"
-                >
-                  <span class="font-medium">APPLICATION</span>
-                  <i class="pi pi-chevron-down"></i>
+                  </Transition>
                 </div>
-                <ul class="list-none p-0 m-0 overflow-hidden">
-                  <li>
-                    <a
-                      v-ripple
-                      class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
-                    >
-                      <i class="pi pi-folder mr-2"></i>
-                      <span class="font-medium">Projects</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      v-ripple
-                      class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
-                    >
-                      <i class="pi pi-chart-bar mr-2"></i>
-                      <span class="font-medium">Performance</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      v-ripple
-                      class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
-                    >
-                      <i class="pi pi-cog mr-2"></i>
-                      <span class="font-medium">Settings</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
+
+                <NuxtLink
+                  to="/team"
+                  class="flex items-center gap-3 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                >
+                  <i class="pi pi-users text-base"></i>
+                  <span>Team</span>
+                </NuxtLink>
+
+                <NuxtLink
+                  to="/messages"
+                  class="flex items-center justify-between px-3 py-2 text-sm text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                >
+                  <span class="flex items-center gap-3">
+                    <i class="pi pi-comments text-base"></i>
+                    <span>Messages</span>
+                  </span>
+                  <span class="px-1.5 py-0.5 text-xs font-medium bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400 rounded">
+                    3
+                  </span>
+                </NuxtLink>
+
+                <NuxtLink
+                  to="/calendar"
+                  class="flex items-center gap-3 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                >
+                  <i class="pi pi-calendar text-base"></i>
+                  <span>Calendar</span>
+                </NuxtLink>
+
+                <NuxtLink
+                  to="/settings"
+                  class="flex items-center gap-3 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                >
+                  <i class="pi pi-cog text-base"></i>
+                  <span>Settings</span>
+                </NuxtLink>
+              </nav>
+            </div>
+
+            <!-- Divider -->
+            <div class="my-4 border-t border-gray-100 dark:border-gray-800"></div>
+
+            <!-- Applications Section -->
+            <div class="px-3">
+              <p class="px-3 text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2">
+                Applications
+              </p>
+              <nav class="space-y-1">
+                <NuxtLink
+                  to="/projects"
+                  class="flex items-center gap-3 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                >
+                  <i class="pi pi-folder text-base"></i>
+                  <span>Projects</span>
+                </NuxtLink>
+
+                <NuxtLink
+                  to="/performance"
+                  class="flex items-center gap-3 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                >
+                  <i class="pi pi-chart-bar text-base"></i>
+                  <span>Performance</span>
+                </NuxtLink>
+
+                <NuxtLink
+                  to="/app-settings"
+                  class="flex items-center gap-3 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                >
+                  <i class="pi pi-cog text-base"></i>
+                  <span>Settings</span>
+                </NuxtLink>
+              </nav>
+            </div>
           </div>
-          <div class="mt-auto">
-            <hr class="mb-3 mx-3 border-top-1 border-none surface-border" />
-            <a
-              v-ripple
-              class="m-3 flex align-items-center cursor-pointer p-3 gap-2 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
-            >
-              <Avatar
-                image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
-                shape="circle"
-              />
-              <span class="font-bold">Amy Elsner</span>
-            </a>
+
+          <!-- User Profile -->
+          <div class="border-t border-gray-100 dark:border-gray-800 p-4">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                <img 
+                  src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
+                  alt="Amy Elsner"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="text-sm font-medium text-gray-900 dark:text-white">Amy Elsner</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400">amy.elsner@example.com</p>
+              </div>
+            </div>
           </div>
         </div>
       </template>
     </Sidebar>
-    <Button icon="pi pi-bars" @click="visible = true" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import Sidebar from "primevue/sidebar";
 import Button from "primevue/button";
-import Avatar from "primevue/avatar";
+import { useRoute } from "vue-router";
 
 const visible = ref(false);
+const route = useRoute();
+
+const openSubmenus = reactive({
+  reports: false,
+  revenue: false
+});
+
+function toggleSubmenu(name: keyof typeof openSubmenus) {
+  openSubmenus[name] = !openSubmenus[name];
+}
+
+// Close sidebar on route change
+watch(() => route.path, () => {
+  visible.value = false;
+  // Reset submenus
+  openSubmenus.reports = false;
+  openSubmenus.revenue = false;
+});
 </script>
+
+<style scoped>
+/* Custom scrollbar */
+.overflow-y-auto {
+  scrollbar-width: thin;
+  scrollbar-color: #e5e7eb #f9fafb;
+}
+
+.overflow-y-auto::-webkit-scrollbar {
+  width: 4px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: #f9fafb;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: #e5e7eb;
+  border-radius: 20px;
+}
+
+.dark .overflow-y-auto::-webkit-scrollbar-track {
+  background: #111827;
+}
+
+.dark .overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: #374151;
+}
+</style>
