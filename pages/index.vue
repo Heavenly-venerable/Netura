@@ -1,338 +1,360 @@
 <script setup lang="ts">
-import type { Ref } from "vue";
-const authStatus = useState("authStatus");
-const Carousel = defineAsyncComponent(() => import("primevue/carousel"));
-const Button = defineAsyncComponent(() => import("primevue/button"));
+// Data statistik
+const statistics = ref([
+  { label: 'Siswa Aktif', value: '1,200+', icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>' },
+  { label: 'Program Keahlian', value: '3', icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>' },
+  { label: 'Tenaga Pendidik', value: '85+', icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>' },
+  { label: 'Prestasi', value: '50+', icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>' }
+])
 
-interface FasilitasImage {
-  name: string;
-  url: string;
-}
-
-const showImageTooltip = ref(false);
-const blogs = ref([
+// Data program keahlian
+const programs = ref([
   { 
-    name: "Kegiatan P5 SMKN 1 Arahan", 
-    date: "23 Desember 2024",
-    description: "Implementasi Projek Penguatan Profil Pelajar Pancasila",
-    image: "https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg"
+    name: 'Teknik Komputer & Jaringan', 
+    alias: 'TKJ',
+    description: 'Mempelajari perakitan komputer, jaringan dasar, administrasi server, dan troubleshooting.',
+    image: 'https://images.unsplash.com/photo-1629904853716-f0bc54eea481?q=80&w=870&auto=format&fit=crop',
+    competencies: ['Network Administrator', 'Teknisi Komputer', 'System Analyst']
   },
   { 
-    name: "Kunjungan Industri ke PT Toyota", 
-    date: "20 Desember 2024",
-    description: "Siswa jurusan TKRO mengikuti kunjungan industri",
-    image: "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
+    name: 'Teknik Kendaraan Ringan', 
+    alias: 'TKRO',
+    description: 'Mempelajari perawatan dan perbaikan mesin kendaraan ringan, sistem kelistrikan, dan chasis.',
+    image: 'https://images.unsplash.com/photo-1567789884554-0b844b597180?w=700&auto=format&fit=crop',
+    competencies: ['Mekanik', 'Diagnostik Kendaraan', 'Spooring Balancing']
   },
   { 
-    name: "Workshop Kewirausahaan", 
-    date: "15 Desember 2024",
-    description: "Pelatihan membuat produk olahan pangan",
-    image: "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg"
+    name: 'Tata Busana', 
+    alias: 'TB',
+    description: 'Mempelajari desain fashion, pembuatan pola, menjahit, dan teknik embroidery.',
+    image: 'https://images.unsplash.com/photo-1516783154360-123b392d0833?w=700&auto=format&fit=crop',
+    competencies: ['Fashion Designer', 'Pattern Maker', 'Sewing Operator']
   }
-]);
+])
 
-const fasilitasImages: Ref<FasilitasImage[]> = ref([
+// Data berita/prestasi terbaru
+const latestNews = ref([
   {
-    name: "Perpustakaan",
-    url: "https://images.unsplash.com/photo-1580537659466-0a9bfa916a54?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: 'Siswa TKJ Juara 1 Lomba Kompetensi Siswa Tingkat Provinsi',
+    date: '15 Maret 2024',
+    category: 'Prestasi',
+    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGFja2F0b258ZW58MHx8MHx8fDA%3D'
   },
   {
-    name: "Masjid",
-    url: "https://images.unsplash.com/photo-1577561426384-62154a1e9457?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: 'Kunjungan Industri Siswa TKRO ke Pabrik Otomotif',
+    date: '10 Maret 2024',
+    category: 'Kegiatan',
+    image: 'https://images.unsplash.com/photo-1567789884554-0b844b597180?w=700&auto=format&fit=crop'
   },
   {
-    name: "Ruang TKRO",
-    url: "https://images.unsplash.com/photo-1567789884554-0b844b597180?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXV0b21vdGl2ZXxlbnwwfHwwfHx8MA%3D%3D",
-  },
-  {
-    name: "Ruang TB",
-    url: "https://images.unsplash.com/photo-1516783154360-123b392d0833?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8c2V3aW5nJTIwcm9vbXxlbnwwfHwwfHx8MA%3D%3D",
-  },
-  {
-    name: "Lab TJKT",
-    url: "https://images.unsplash.com/photo-1629904853716-f0bc54eea481?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-]);
+    title: 'Workshop Kewirausahaan untuk Siswa Kelas XII',
+    date: '5 Maret 2024',
+    category: 'Workshop',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=870&auto=format&fit=crop'
+  }
+])
 
-const selectedFasilitas = ref(fasilitasImages.value[0]);
-
-const responsiveOptions = ref([
-  { breakpoint: "1400px", numVisible: 1, numScroll: 1 },
-  { breakpoint: "1199px", numVisible: 1, numScroll: 1 },
-  { breakpoint: "767px", numVisible: 1, numScroll: 1 },
-  { breakpoint: "575px", numVisible: 1, numScroll: 1 },
-]);
+// Testimonial alumni
+const testimonials = ref([
+  {
+    name: 'Ahmad Fauzi',
+    year: 'Angkatan 2020',
+    program: 'TKJ',
+    quote: 'SMKN 1 ARAHAN membekali saya dengan skill yang relevan dengan dunia kerja. Sekarang saya bekerja sebagai network engineer di perusahaan telekomunikasi.',
+    avatar: 'https://ui-avatars.com/api/?name=Ahmad+Fauzi&background=amber&color=fff'
+  },
+  {
+    name: 'Siti Aminah',
+    year: 'Angkatan 2019',
+    program: 'TB',
+    quote: 'Berkat pembelajaran di jurusan Tata Busana, saya bisa membuka butik sendiri dan memberdayakan ibu-ibu di desa.',
+    avatar: 'https://ui-avatars.com/api/?name=Siti+Aminah&background=amber&color=fff'
+  }
+])
 
 function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-function onFasilitasClick(fasilitas: FasilitasImage): void {
-  selectedFasilitas.value = fasilitas;
-  showImageTooltip.value = true;
-  setTimeout(() => {
-    showImageTooltip.value = false;
-  }, 2000);
+  window.scrollTo({ top: 0, behavior: "smooth" })
 }
 
 onMounted(() => {
-  scrollToTop();
-});
+  scrollToTop()
+})
 </script>
 
 <template>
-  <main class="pt-20 pb-12 px-4 md:px-6 lg:px-8 max-w-7xl mx-auto">
-    <!-- Hero Section - Minimalis -->
-    <section class="py-12 md:py-16 text-center border-b border-gray-100 dark:border-gray-800">
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-gray-900 dark:text-white mb-4">
-        Selamat Datang di
-        <span class="font-medium text-amber-600 dark:text-amber-400">SMKN 1 ARAHAN</span>
-      </h1>
-      <p class="text-base text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
-        Website resmi SMKN 1 ARAHAN - Sekolah unggulan di bidang teknologi dan kewirausahaan. 
-        Berkomitmen mencetak generasi yang religius, cerdas, dan berkarakter.
-      </p>
-      <div class="mt-8">
-        <NuxtLink 
-          to="/kontak"
-          class="inline-flex items-center gap-2 px-6 py-2.5 text-sm text-amber-600 border border-amber-200 rounded-md hover:bg-amber-50 dark:text-amber-400 dark:border-amber-800 dark:hover:bg-amber-900/30 transition-colors"
-        >
-          Hubungi Kami
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </NuxtLink>
-      </div>
-    </section>
-
-    <!-- Grid Layout -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 py-12">
-      <!-- Agenda Section -->
-      <div class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-lg font-medium text-gray-900 dark:text-white">Agenda</h2>
-          <NuxtLink to="/agenda" class="text-sm text-amber-600 hover:text-amber-700 dark:text-amber-400 flex items-center gap-1">
-            Lihat semua
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
-            </svg>
-          </NuxtLink>
-        </div>
-        
-        <div class="space-y-2">
-          <div v-for="n in 5" :key="n" class="p-4 bg-gray-50 dark:bg-gray-800/50 rounded-md">
-            <div class="flex items-center gap-3 mb-2">
-              <span class="text-xs font-medium text-amber-600 dark:text-amber-400">15 Maret 2024</span>
-              <span class="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-600"></span>
-              <span class="text-xs text-gray-500 dark:text-gray-400">08:00 WIB</span>
+  <main class="min-h-screen pt-20">
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-b from-amber-50/50 to-white dark:from-gray-900 dark:to-gray-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <!-- Left Content -->
+          <div class="text-center lg:text-left">
+            <div class="inline-flex items-center px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-sm mb-6">
+              <span class="w-2 h-2 bg-amber-500 rounded-full mr-2"></span>
+              Terakreditasi A
             </div>
-            <p class="text-sm text-gray-900 dark:text-white">Pertemuan Orang Tua Siswa {{ n }}</p>
+            <h1 class="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-4">
+              Selamat Datang di
+              <span class="font-medium text-amber-600 dark:text-amber-400 block mt-2">SMKN 1 ARAHAN</span>
+            </h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+              Sekolah Menengah Kejuruan unggulan di Kabupaten Indramayu dengan 
+              <span class="font-medium text-amber-600 dark:text-amber-400">3 program keahlian</span> 
+              dan komitmen mencetak lulusan yang religius, cerdas, dan berkarakter.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <NuxtLink 
+                to="/ppdb" 
+                class="px-6 py-3 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors text-center"
+              >
+                Daftar PPDB 2024
+              </NuxtLink>
+              <NuxtLink 
+                to="/program" 
+                class="px-6 py-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-center"
+              >
+                Lihat Program Keahlian
+              </NuxtLink>
+            </div>
           </div>
-        </div>
-      </div>
-
-      <!-- Blog Section -->
-      <div class="md:col-span-2 space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-lg font-medium text-gray-900 dark:text-white">Blog & Berita</h2>
-          <NuxtLink to="/blog" class="text-sm text-amber-600 hover:text-amber-700 dark:text-amber-400 flex items-center gap-1">
-            Lihat semua
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
-            </svg>
-          </NuxtLink>
-        </div>
-
-        <Carousel
-          :value="blogs"
-          :responsiveOptions="responsiveOptions"
-          :showIndicators="false"
-          :showNavigators="false"
-          circular
-          :autoplayInterval="5000"
-          class="overflow-hidden rounded-md"
-        >
-          <template #item="slotProps">
-            <div class="relative aspect-[16/9]">
+          
+          <!-- Right Image -->
+          <div class="relative">
+            <div class="aspect-square rounded-2xl overflow-hidden border-4 border-white dark:border-gray-800 shadow-xl">
               <img 
-                :src="slotProps.data.image" 
-                :alt="slotProps.data.name"
+                src="https://images.unsplash.com/photo-1613896527026-f195d5c818ed?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c2Nob29sJTIwYnVpbGRpbmd8ZW58MHx8MHx8fDA%3D" 
+                alt="Gedung SMKN 1 ARAHAN"
                 class="w-full h-full object-cover"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent">
-                <div class="absolute bottom-0 left-0 right-0 p-6">
-                  <div class="flex items-center gap-2 mb-2">
-                    <span class="text-xs text-white/80">{{ slotProps.data.date }}</span>
-                  </div>
-                  <h3 class="text-lg font-medium text-white mb-1">{{ slotProps.data.name }}</h3>
-                  <p class="text-sm text-white/80">{{ slotProps.data.description }}</p>
+            </div>
+            <div class="absolute -bottom-6 -left-6 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-lg border border-gray-100 dark:border-gray-700">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 dark:text-amber-400">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-xs text-gray-500 dark:text-gray-500">Tahun Ajaran</p>
+                  <p class="font-medium text-gray-900 dark:text-white">2024/2025</p>
                 </div>
               </div>
             </div>
-          </template>
-        </Carousel>
-      </div>
-    </div>
-
-    <!-- Ekstrakulikuler Section -->
-    <section class="py-12 border-t border-gray-100 dark:border-gray-800">
-      <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-6">Ekstrakulikuler</h2>
-      
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="space-y-4">
-          <img 
-            class="w-full h-48 object-cover rounded-md"
-            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg"
-            alt="Paskibra"
-          />
-          <p class="text-sm text-gray-700 dark:text-gray-300">Paskibra</p>
+          </div>
         </div>
-        <div class="space-y-4">
-          <img 
-            class="w-full h-48 object-cover rounded-md"
-            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg"
-            alt="Pramuka"
-          />
-          <p class="text-sm text-gray-700 dark:text-gray-300">Pramuka</p>
-        </div>
-        <div class="space-y-4">
-          <img 
-            class="w-full h-48 object-cover rounded-md"
-            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg"
-            alt="Futsal"
-          />
-          <p class="text-sm text-gray-700 dark:text-gray-300">Futsal</p>
-        </div>
-        <div class="space-y-4">
-          <img 
-            class="w-full h-48 object-cover rounded-md"
-            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg"
-            alt="Voli"
-          />
-          <p class="text-sm text-gray-700 dark:text-gray-300">Voli</p>
-        </div>
-      </div>
-      
-      <div class="mt-6 text-center">
-        <NuxtLink 
-          to="/ekstrakulikuler"
-          class="inline-flex items-center gap-2 px-4 py-2 text-sm text-gray-600 border border-gray-200 rounded-md hover:bg-gray-50 dark:text-gray-400 dark:border-gray-700 dark:hover:bg-gray-800 transition-colors"
-        >
-          Lihat semua ekstrakulikuler
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </NuxtLink>
       </div>
     </section>
 
-    <!-- Fasilitas Section -->
-    <section class="py-12 border-t border-gray-100 dark:border-gray-800">
-      <div class="flex items-center justify-between mb-6">
-        <div>
-          <h2 class="text-lg font-medium text-gray-900 dark:text-white">Fasilitas</h2>
-          <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Preview fasilitas unggulan sekolah</p>
-        </div>
-        <NuxtLink 
-          to="/fasilitas"
-          class="text-sm text-amber-600 hover:text-amber-700 dark:text-amber-400 flex items-center gap-1"
-        >
-          Lihat semua
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
-          </svg>
-        </NuxtLink>
-      </div>
-
-      <!-- Fasilitas Thumbnails -->
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 mb-6">
-        <button
-          v-for="fasilitas in fasilitasImages"
-          :key="fasilitas.name"
-          @click="onFasilitasClick(fasilitas)"
-          class="px-3 py-2 text-xs text-left border border-gray-200 rounded-md hover:border-amber-200 hover:bg-amber-50 dark:border-gray-700 dark:hover:border-amber-800 dark:hover:bg-amber-900/30 transition-colors"
-          :class="{ 'border-amber-500 dark:border-amber-400': selectedFasilitas.name === fasilitas.name }"
-        >
-          {{ fasilitas.name }}
-        </button>
-      </div>
-
-      <!-- Fasilitas Preview -->
-      <div class="relative rounded-md overflow-hidden bg-gray-100 dark:bg-gray-800">
-        <img
-          :src="selectedFasilitas.url"
-          :alt="selectedFasilitas.name"
-          class="w-full h-80 object-cover"
-        />
-        
-        <!-- Tooltip -->
-        <Transition
-          enter-active-class="transition duration-200 ease-out"
-          enter-from-class="opacity-0 translate-y-2"
-          enter-to-class="opacity-100 translate-y-0"
-          leave-active-class="transition duration-150 ease-in"
-          leave-from-class="opacity-100 translate-y-0"
-          leave-to-class="opacity-0 translate-y-2"
-        >
-          <div
-            v-if="showImageTooltip"
-            class="absolute bottom-4 left-1/2 -translate-x-1/2"
+    <!-- Statistics Section -->
+    <section class="py-16 border-b border-gray-100 dark:border-gray-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div 
+            v-for="stat in statistics" 
+            :key="stat.label"
+            class="text-center p-6 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-800"
           >
-            <div class="px-4 py-2 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-md">
-              <p class="text-sm font-medium text-gray-900 dark:text-white">
-                {{ selectedFasilitas.name }}
-              </p>
+            <div class="w-12 h-12 mx-auto mb-3 text-amber-600 dark:text-amber-400" v-html="stat.icon"></div>
+            <div class="text-3xl font-light text-gray-900 dark:text-white mb-1">{{ stat.value }}</div>
+            <div class="text-sm text-gray-600 dark:text-gray-400">{{ stat.label }}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <h2 class="text-3xl font-light text-gray-900 dark:text-white mb-3">
+            Program
+            <span class="font-medium text-amber-600 dark:text-amber-400">Keahlian</span>
+          </h2>
+          <p class="text-gray-600 dark:text-gray-400">
+            Pilih program keahlian yang sesuai dengan minat dan bakat Anda
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div 
+            v-for="program in programs" 
+            :key="program.name"
+            class="group bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl overflow-hidden hover:border-amber-200 dark:hover:border-amber-900 transition-all"
+          >
+            <div class="relative h-48 overflow-hidden">
+              <img 
+                :src="program.image" 
+                :alt="program.name"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="px-3 py-1 bg-amber-500 text-white text-sm font-medium rounded-full">
+                  {{ program.alias }}
+                </span>
+              </div>
+            </div>
+            <div class="p-5">
+              <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">{{ program.name }}</h3>
+              <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">{{ program.description }}</p>
+              <div class="flex flex-wrap gap-2">
+                <span 
+                  v-for="item in program.competencies" 
+                  :key="item"
+                  class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded"
+                >
+                  {{ item }}
+                </span>
+              </div>
             </div>
           </div>
-        </Transition>
+        </div>
       </div>
     </section>
 
-    <!-- Lokasi Section -->
-    <section class="py-12 border-t border-gray-100 dark:border-gray-800">
-      <div class="mb-6">
-        <h2 class="text-lg font-medium text-gray-900 dark:text-white">Lokasi Sekolah</h2>
-        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Temukan kami di Google Maps</p>
+    <!-- News & Achievements Section -->
+    <section class="py-16 bg-gray-50 dark:bg-gray-800/50 border-y border-gray-100 dark:border-gray-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <!-- Latest News -->
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-xl font-medium text-gray-900 dark:text-white">Berita Terbaru</h3>
+              <NuxtLink to="/blog" class="text-sm text-amber-600 hover:text-amber-700 dark:text-amber-400 flex items-center gap-1">
+                Lihat Semua
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
+                </svg>
+              </NuxtLink>
+            </div>
+            <div class="space-y-4">
+              <div 
+                v-for="news in latestNews" 
+                :key="news.title"
+                class="flex gap-4 p-4 bg-white dark:bg-gray-900 rounded-lg border border-gray-100 dark:border-gray-800"
+              >
+                <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                  <img :src="news.image" :alt="news.title" class="w-full h-full object-cover" />
+                </div>
+                <div>
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="text-xs px-2 py-0.5 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-full">
+                      {{ news.category }}
+                    </span>
+                    <span class="text-xs text-gray-500 dark:text-gray-500">{{ news.date }}</span>
+                  </div>
+                  <h4 class="text-sm font-medium text-gray-900 dark:text-white line-clamp-2">{{ news.title }}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Upcoming Agenda -->
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-xl font-medium text-gray-900 dark:text-white">Agenda Mendatang</h3>
+              <NuxtLink to="/agenda" class="text-sm text-amber-600 hover:text-amber-700 dark:text-amber-400 flex items-center gap-1">
+                Lihat Semua
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
+                </svg>
+              </NuxtLink>
+            </div>
+            <div class="space-y-3">
+              <div 
+                v-for="i in 4" 
+                :key="i"
+                class="flex items-center gap-4 p-4 bg-white dark:bg-gray-900 rounded-lg border border-gray-100 dark:border-gray-800"
+              >
+                <div class="text-center min-w-[60px]">
+                  <div class="text-2xl font-light text-amber-600 dark:text-amber-400">25</div>
+                  <div class="text-xs text-gray-500 dark:text-gray-500">Maret</div>
+                </div>
+                <div>
+                  <h4 class="text-sm font-medium text-gray-900 dark:text-white">Pertemuan Orang Tua Siswa</h4>
+                  <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">09.00 - 12.00 WIB • Aula Sekolah</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      
-      <div class="rounded-md overflow-hidden border border-gray-200 dark:border-gray-700">
-        <iframe
-          src="https://maps.google.com/maps?q=Smkn1arahan&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
-          frameborder="0"
-          loading="lazy"
-          class="w-full h-80"
-          allowfullscreen
-        ></iframe>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <h2 class="text-3xl font-light text-gray-900 dark:text-white mb-3">
+            Kata
+            <span class="font-medium text-amber-600 dark:text-amber-400">Alumni</span>
+          </h2>
+          <p class="text-gray-600 dark:text-gray-400">
+            Apa kata mereka tentang pengalaman belajar di SMKN 1 ARAHAN
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div 
+            v-for="testi in testimonials" 
+            :key="testi.name"
+            class="p-6 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-800"
+          >
+            <div class="flex items-start gap-4">
+              <img :src="testi.avatar" :alt="testi.name" class="w-12 h-12 rounded-full" />
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <h4 class="font-medium text-gray-900 dark:text-white">{{ testi.name }}</h4>
+                  <span class="text-xs px-2 py-0.5 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-full">
+                    {{ testi.program }}
+                  </span>
+                </div>
+                <p class="text-xs text-gray-500 dark:text-gray-500 mb-3">{{ testi.year }}</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400 italic">"{{ testi.quote }}"</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      
-      <div class="mt-4 text-sm text-gray-600 dark:text-gray-400">
-        <p>Jl. Raya Arahan, Linggajati, Kec. Arahan, Kabupaten Indramayu, Jawa Barat</p>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-amber-50/50 dark:bg-amber-900/10 border-t border-amber-100 dark:border-amber-900/30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-light text-gray-900 dark:text-white mb-3">
+          Siap Bergabung dengan
+          <span class="font-medium text-amber-600 dark:text-amber-400">SMKN 1 ARAHAN?</span>
+        </h2>
+        <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+          Daftarkan diri Anda sekarang dan raih masa depan cerah bersama kami
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <NuxtLink 
+            to="/ppdb" 
+            class="px-8 py-3 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors"
+          >
+            Daftar PPDB Online
+          </NuxtLink>
+          <NuxtLink 
+            to="/kontak" 
+            class="px-8 py-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+          >
+            Hubungi Kami
+          </NuxtLink>
+        </div>
       </div>
     </section>
   </main>
 </template>
 
 <style scoped>
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-::-webkit-scrollbar-track {
-  background: #f9fafb;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #e5e7eb;
-  border-radius: 4px;
-}
-
-.dark ::-webkit-scrollbar-track {
-  background: #111827;
-}
-
-.dark ::-webkit-scrollbar-thumb {
-  background: #374151;
+.group:hover img {
+  transform: scale(1.05);
 }
 </style>

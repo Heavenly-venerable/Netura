@@ -33,7 +33,7 @@ const agendas = ref([
     date: "8 Februari 2024",
     time: "07.30 - 11.30 WIB",
     category: "Keagamaan",
-    image: "https://images.unsplash.com/photo-1609592805610-1f6b2b3f2f2f?q=80&w=870&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1487800940032-1cf211187aea?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGlzbGFtfGVufDB8fDB8fHww",
     participants: 800,
     status: "akan-datang"
   },
@@ -69,7 +69,7 @@ const agendas = ref([
     date: "10 Mei 2024",
     time: "08.00 - 12.00 WIB",
     category: "Acara",
-    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=870&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1525921429624-479b6a26d84d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGdyYWR1YXRpb258ZW58MHx8MHx8fDA%3D",
     participants: 1500,
     status: "akan-datang"
   },
@@ -217,7 +217,7 @@ onMounted(() => {
                 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400': item.status === 'selesai'
               }">
                 {{ item.status === 'akan-datang' ? 'Akan Datang' : item.status === 'sedang-berlangsung' ? 'Berlangsung'
-                : 'Selesai' }}
+                  : 'Selesai' }}
               </span>
             </div>
           </div>

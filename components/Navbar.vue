@@ -29,6 +29,14 @@ const items = ref([
       { label: "Agenda", url: "/agenda" },
     ],
   },
+  {
+    label: "Kesiswaan",
+    items: [
+      { label: "Organisasi Siswa", url: "/osis" },
+      { label: "Siswa", url: "/siswa" },
+      { label: "Kurikulum", url: "/kurikulum" },
+    ],
+  },
   { label: "Blog", url: "/blog" },
   { label: "Fasilitas", url: "/fasilitas" },
   { label: "Galeri", url: "/galeri" },
@@ -81,7 +89,9 @@ onMounted(() => {
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
       <NuxtLink to="/" class="flex items-center gap-2">
-        <img class="h-8 w-8" src="https://psmk.jabarprov.go.id/_next/image?url=https%3A%2F%2Fpsmk.jabarprov.go.id%2Fstorage%2Fimage%2FlwQIeD1Ocmyc9h71q7BWxw15blFhXtpb8eL0Ggxy.jpg&w=750&q=75" alt="NETURA" />
+        <img class="h-8 w-8"
+          src="https://psmk.jabarprov.go.id/_next/image?url=https%3A%2F%2Fpsmk.jabarprov.go.id%2Fstorage%2Fimage%2FlwQIeD1Ocmyc9h71q7BWxw15blFhXtpb8eL0Ggxy.jpg&w=750&q=75"
+          alt="NETURA" />
         <span class="text-lg font-medium dark:text-white">NETURA</span>
       </NuxtLink>
 
