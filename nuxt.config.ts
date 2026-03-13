@@ -9,6 +9,7 @@ export default defineNuxtConfig({
         lang: 'id'
       },
       title: 'SMKN 1 ARAHAN - Sekolah Menengah Kejuruan Negeri 1 Arahan',
+      titleTemplate: '%s | SMKN 1 ARAHAN', // Template untuk judul halaman
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -28,9 +29,9 @@ export default defineNuxtConfig({
           property: 'og:description',
           content: 'SMKN 1 ARAHAN adalah sekolah menengah kejuruan unggulan di Kabupaten Indramayu dengan program keahlian TKJ, TKRO, dan Tata Busana.'
         },
-        { property: 'og:image', content: '/logo.png' },
-        { property: 'og:image:width', content: '750' },
-        { property: 'og:image:height', content: '750' },
+        { property: 'og:image', content: '/android-chrome-512x512.png' }, // Gunakan file yang ada
+        { property: 'og:image:width', content: '512' },
+        { property: 'og:image:height', content: '512' },
         { property: 'og:image:alt', content: 'Logo SMKN 1 ARAHAN' },
 
         // Twitter
@@ -43,17 +44,23 @@ export default defineNuxtConfig({
         },
         {
           name: 'twitter:image',
-          content: '/logo.png'
+          content: '/android-chrome-512x512.png' // Gunakan file yang ada
         },
 
         // MS Application
         { name: 'msapplication-TileColor', content: '#f59e0b' },
+        { name: 'msapplication-TileImage', content: '/android-chrome-192x192.png' }, // Tambahkan untuk Windows
         { name: 'theme-color', content: '#f59e0b' }
       ],
       link: [
-        { rel: 'icon', type: 'image/png', href: '/logo.png', sizes: '96x96' },
-        { rel: 'icon', type: 'image/png', href: '/logo.png', sizes: '192x192' },
-        { rel: 'apple-touch-icon', href: '/logo.png', sizes: '180x180' },
+        // Favicon untuk browser - gunakan file yang sudah ada
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
+        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
+        { rel: 'icon', type: 'image/png', sizes: '192x192', href: '/android-chrome-192x192.png' },
+        { rel: 'icon', type: 'image/png', sizes: '512x512', href: '/android-chrome-512x512.png' },
+        { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
+        { rel: 'manifest', href: '/site.webmanifest' }, // Tambahkan manifest
         { rel: 'canonical', href: 'https://netura.vercel.app' },
       ]
     }
@@ -94,10 +101,14 @@ export default defineNuxtConfig({
 
   sitemap: {
     enabled: true,
+    siteUrl: 'https://netura.vercel.app', // Tambahkan siteUrl
   },
 
   robots: {
     enabled: true,
+    UserAgent: '*',
+    Disallow: [], // Izinkan semua halaman
+    Sitemap: 'https://netura.vercel.app/sitemap.xml'
   },
 
   routeRules: {
