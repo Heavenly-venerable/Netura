@@ -41,9 +41,7 @@ async function handleLogout() {
       <!-- Logo & Brand -->
       <div class="mb-8 text-center">
         <NuxtLink to="/" class="inline-flex items-center justify-center mb-4">
-          <img class="h-12 w-12"
-            src="https://psmk.jabarprov.go.id/_next/image?url=https%3A%2F%2Fpsmk.jabarprov.go.id%2Fstorage%2Fimage%2FlwQIeD1Ocmyc9h71q7BWxw15blFhXtpb8eL0Ggxy.jpg&w=750&q=75"
-            alt="NETURA" />
+          <img class="h-12 w-12" src="/android-chrome-512x512.png" alt="NETURA" />
         </NuxtLink>
         <h1 class="text-2xl font-light text-gray-900 dark:text-white">
           Selamat Datang Kembali
