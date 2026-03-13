@@ -51,7 +51,8 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#f59e0b' }
       ],
       link: [
-        { rel: 'icon', type: 'image/png', href: 'https://psmk.jabarprov.go.id/_next/image?url=https%3A%2F%2Fpsmk.jabarprov.go.id%2Fstorage%2Fimage%2FlwQIeD1Ocmyc9h71q7BWxw15blFhXtpb8eL0Ggxy.jpg&w=750&q=75' },
+        { rel: 'icon', type: 'image/png', href: 'https://psmk.jabarprov.go.id/_next/image?url=https%3A%2F%2Fpsmk.jabarprov.go.id%2Fstorage%2Fimage%2FlwQIeD1Ocmyc9h71q7BWxw15blFhXtpb8eL0Ggxy.jpg&w=96&q=75', sizes: '96x96' },
+        { rel: 'icon', type: 'image/png', href: 'https://psmk.jabarprov.go.id/_next/image?url=https%3A%2F%2Fpsmk.jabarprov.go.id%2Fstorage%2Fimage%2FlwQIeD1Ocmyc9h71q7BWxw15blFhXtpb8eL0Ggxy.jpg&w=192&q=75', sizes: '192x192' },
         { rel: 'canonical', href: 'https://smkn1arahan.sch.id' },
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }
       ]
@@ -60,7 +61,7 @@ export default defineNuxtConfig({
 
   css: ["~/assets/css/main.css"],
 
-  modules: ["nuxt-primevue", "@samk-dev/nuxt-vcalendar"],
+  modules: ["nuxt-primevue", "@samk-dev/nuxt-vcalendar", '@nuxtjs/sitemap', '@nuxtjs/robots'],
 
   postcss: {
     plugins: {
@@ -81,6 +82,24 @@ export default defineNuxtConfig({
     compressPublicAssets: true
   },
 
+  site: {
+    url: 'https://netura.vercel.app',
+    name: 'SMKN 1 ARAHAN',
+    description: 'Sekolah Menengah Kejuruan unggulan di Kabupaten Indramayu dengan program keahlian TKJ, TKRO, dan Tata Busana.',
+    defaultLocale: 'id',
+    identity: {
+      type: 'Organization'
+    },
+  },
+
+  sitemap: {
+    enabled: true,
+  },
+
+  robots: {
+    enabled: true,
+  },
+
   routeRules: {
     '/': { prerender: true },
     '/sambutan': { prerender: true },
@@ -92,6 +111,9 @@ export default defineNuxtConfig({
     '/prestasi': { prerender: true },
     '/ekstrakulikuler': { prerender: true },
     '/agenda': { prerender: true },
+    '/osis': { prerender: true },
+    '/siswa': { prerender: true },
+    '/kurikulum': { prerender: true },
     '/blog': { prerender: true },
     '/fasilitas': { prerender: true },
     '/galeri': { prerender: true },
