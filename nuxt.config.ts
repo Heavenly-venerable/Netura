@@ -22,20 +22,20 @@ export default defineNuxtConfig({
 
         // Open Graph / Facebook
         { property: 'og:type', content: 'website' },
-        { property: 'og:url', content: 'https://smkn1arahan.sch.id' },
+        { property: 'og:url', content: 'https://netura.vercel.app' },
         { property: 'og:title', content: 'SMKN 1 ARAHAN - Sekolah Menengah Kejuruan Negeri 1 Arahan' },
         {
           property: 'og:description',
           content: 'SMKN 1 ARAHAN adalah sekolah menengah kejuruan unggulan di Kabupaten Indramayu dengan program keahlian TKJ, TKRO, dan Tata Busana.'
         },
-        {
-          property: 'og:image',
-          content: 'https://psmk.jabarprov.go.id/_next/image?url=https%3A%2F%2Fpsmk.jabarprov.go.id%2Fstorage%2Fimage%2FlwQIeD1Ocmyc9h71q7BWxw15blFhXtpb8eL0Ggxy.jpg&w=750&q=75'
-        },
+        { property: 'og:image', content: '/logo.png' },
+        { property: 'og:image:width', content: '750' },
+        { property: 'og:image:height', content: '750' },
+        { property: 'og:image:alt', content: 'Logo SMKN 1 ARAHAN' },
 
         // Twitter
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:url', content: 'https://smkn1arahan.sch.id' },
+        { name: 'twitter:url', content: 'https://netura.vercel.app' },
         { name: 'twitter:title', content: 'SMKN 1 ARAHAN - Sekolah Menengah Kejuruan Negeri 1 Arahan' },
         {
           name: 'twitter:description',
@@ -43,7 +43,7 @@ export default defineNuxtConfig({
         },
         {
           name: 'twitter:image',
-          content: 'https://psmk.jabarprov.go.id/_next/image?url=https%3A%2F%2Fpsmk.jabarprov.go.id%2Fstorage%2Fimage%2FlwQIeD1Ocmyc9h71q7BWxw15blFhXtpb8eL0Ggxy.jpg&w=750&q=75'
+          content: '/logo.png'
         },
 
         // MS Application
@@ -51,10 +51,10 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#f59e0b' }
       ],
       link: [
-        { rel: 'icon', type: 'image/png', href: 'https://psmk.jabarprov.go.id/_next/image?url=https%3A%2F%2Fpsmk.jabarprov.go.id%2Fstorage%2Fimage%2FlwQIeD1Ocmyc9h71q7BWxw15blFhXtpb8eL0Ggxy.jpg&w=96&q=75', sizes: '96x96' },
-        { rel: 'icon', type: 'image/png', href: 'https://psmk.jabarprov.go.id/_next/image?url=https%3A%2F%2Fpsmk.jabarprov.go.id%2Fstorage%2Fimage%2FlwQIeD1Ocmyc9h71q7BWxw15blFhXtpb8eL0Ggxy.jpg&w=192&q=75', sizes: '192x192' },
-        { rel: 'canonical', href: 'https://smkn1arahan.sch.id' },
-        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }
+        { rel: 'icon', type: 'image/png', href: '/logo.png', sizes: '96x96' },
+        { rel: 'icon', type: 'image/png', href: '/logo.png', sizes: '192x192' },
+        { rel: 'apple-touch-icon', href: '/logo.png', sizes: '180x180' },
+        { rel: 'canonical', href: 'https://netura.vercel.app' },
       ]
     }
   },
