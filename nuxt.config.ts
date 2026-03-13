@@ -14,6 +14,10 @@ export default defineNuxtConfig({
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         {
+          name: 'google-site-verification',
+          content='zoFuizzoZbLz8QCjRuxYQbvqnVO4mMYCatipFuqK-DU'
+        },
+        {
           name: 'description',
           content: 'SMKN 1 ARAHAN adalah sekolah menengah kejuruan unggulan di Kabupaten Indramayu dengan program keahlian TKJ, TKRO, dan Tata Busana. Be Religius, Be Smart and Be Fun.'
         },
