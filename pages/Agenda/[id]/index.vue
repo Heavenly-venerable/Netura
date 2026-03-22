@@ -11,7 +11,7 @@ const agendaDetail = ref({
   description: "Pertemuan orang tua siswa baru kelas X untuk sosialisasi program sekolah dan pembagian rapor tengah semester",
   fullDescription: `
     <p>Pertemuan orang tua siswa kelas X ini merupakan agenda rutin sekolah dalam rangka menjalin komunikasi dan kerjasama antara pihak sekolah dengan orang tua/wali siswa. Acara ini bertujuan untuk:</p>
-    
+
     <ul>
       <li>Mensosialisasikan program-program sekolah untuk semester genap</li>
       <li>Membahas perkembangan akademik dan non-akademik siswa selama satu semester</li>
@@ -64,12 +64,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="min-h-screen pt-20 pb-16">
+  <main class="min-h-screen pt-20 pb-16 bg-white dark:bg-gray-900 transition-colors duration-200">
     <!-- Header dengan Breadcrumb -->
     <div class="border-b border-gray-100 dark:border-gray-800">
       <div class="max-w-4xl mx-auto px-4 py-8">
         <!-- Breadcrumb -->
-        <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500 mb-4">
+        <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-4">
           <NuxtLink to="/" class="hover:text-amber-600 dark:hover:text-amber-400 transition-colors">Beranda</NuxtLink>
           <span>/</span>
           <NuxtLink to="/agenda" class="hover:text-amber-600 dark:hover:text-amber-400 transition-colors">Agenda
@@ -145,7 +145,7 @@ onMounted(() => {
             <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Rundown Acara</h2>
             <div class="border border-gray-100 dark:border-gray-800 rounded-md overflow-hidden">
               <div v-for="(item, index) in agendaDetail.timeline" :key="index"
-                class="flex items-center p-3 even:bg-gray-50 dark:even:bg-gray-800/50 text-sm">
+                class="flex items-center p-3 even:bg-gray-50 dark:even:bg-gray-800/50 text-sm transition-colors duration-200">
                 <span class="w-24 text-amber-600 dark:text-amber-400 font-medium">{{ item.time }}</span>
                 <span class="text-gray-700 dark:text-gray-300">{{ item.activity }}</span>
               </div>
@@ -168,7 +168,8 @@ onMounted(() => {
         <!-- Right Column - Sidebar -->
         <div class="space-y-4">
           <!-- Location Card -->
-          <div class="border border-gray-100 dark:border-gray-800 rounded-md overflow-hidden">
+          <div
+            class="border border-gray-100 dark:border-gray-800 rounded-md overflow-hidden transition-colors duration-200">
             <div class="p-4 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-800">
               <h3 class="font-medium text-gray-900 dark:text-white flex items-center gap-2">
                 <svg class="w-4 h-4 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor"
@@ -183,9 +184,9 @@ onMounted(() => {
             </div>
             <div class="p-4">
               <p class="text-sm text-gray-700 dark:text-gray-300 mb-3">{{ agendaDetail.location }}</p>
-              <p class="text-xs text-gray-500 dark:text-gray-500 mb-3">{{ agendaDetail.address }}</p>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mb-3">{{ agendaDetail.address }}</p>
               <a :href="`https://maps.google.com/?q=${agendaDetail.address}`" target="_blank"
-                class="inline-flex items-center gap-2 text-xs text-amber-600 hover:text-amber-700 dark:text-amber-400">
+                class="inline-flex items-center gap-2 text-xs text-amber-600 hover:text-amber-700 dark:text-amber-400 dark:hover:text-amber-300 transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -196,7 +197,8 @@ onMounted(() => {
           </div>
 
           <!-- Contact Person Card -->
-          <div class="border border-gray-100 dark:border-gray-800 rounded-md overflow-hidden">
+          <div
+            class="border border-gray-100 dark:border-gray-800 rounded-md overflow-hidden transition-colors duration-200">
             <div class="p-4 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-800">
               <h3 class="font-medium text-gray-900 dark:text-white flex items-center gap-2">
                 <svg class="w-4 h-4 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor"
@@ -209,11 +211,11 @@ onMounted(() => {
             </div>
             <div class="p-4">
               <p class="font-medium text-gray-900 dark:text-white text-sm">{{ agendaDetail.contactPerson.name }}</p>
-              <p class="text-xs text-gray-500 dark:text-gray-500 mb-3">{{ agendaDetail.contactPerson.role }}</p>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mb-3">{{ agendaDetail.contactPerson.role }}</p>
 
               <div class="space-y-2 text-sm">
                 <a :href="`tel:${agendaDetail.contactPerson.phone}`"
-                  class="flex items-center gap-2 text-gray-600 hover:text-amber-600 dark:text-gray-400 dark:hover:text-amber-400">
+                  class="flex items-center gap-2 text-gray-600 hover:text-amber-600 dark:text-gray-400 dark:hover:text-amber-400 transition-colors">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                       d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -221,7 +223,7 @@ onMounted(() => {
                   {{ agendaDetail.contactPerson.phone }}
                 </a>
                 <a :href="`mailto:${agendaDetail.contactPerson.email}`"
-                  class="flex items-center gap-2 text-gray-600 hover:text-amber-600 dark:text-gray-400 dark:hover:text-amber-400">
+                  class="flex items-center gap-2 text-gray-600 hover:text-amber-600 dark:text-gray-400 dark:hover:text-amber-400 transition-colors">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                       d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -234,7 +236,7 @@ onMounted(() => {
 
           <!-- Documents Card -->
           <div v-if="agendaDetail.documents"
-            class="border border-gray-100 dark:border-gray-800 rounded-md overflow-hidden">
+            class="border border-gray-100 dark:border-gray-800 rounded-md overflow-hidden transition-colors duration-200">
             <div class="p-4 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-800">
               <h3 class="font-medium text-gray-900 dark:text-white flex items-center gap-2">
                 <svg class="w-4 h-4 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor"
@@ -246,8 +248,8 @@ onMounted(() => {
               </h3>
             </div>
             <div class="p-4 space-y-2">
-              <a v-for="doc in agendaDetail.documents" :key="doc.name" :href="doc.file"
-                class="flex items-center gap-2 text-sm text-gray-600 hover:text-amber-600 dark:text-gray-400 dark:hover:text-amber-400">
+              <a v-for="doc in agendaDetail.documents" :key="doc.name" :href="doc.file" target="_blank"
+                class="flex items-center gap-2 text-sm text-gray-600 hover:text-amber-600 dark:text-gray-400 dark:hover:text-amber-400 transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -294,10 +296,20 @@ onMounted(() => {
 
 .prose li {
   margin-bottom: 0.5rem;
+  color: #4b5563;
+}
+
+.dark .prose li {
+  color: #d1d5db;
 }
 
 .prose p {
   margin-bottom: 1rem;
   line-height: 1.7;
+  color: #4b5563;
+}
+
+.dark .prose p {
+  color: #d1d5db;
 }
 </style>

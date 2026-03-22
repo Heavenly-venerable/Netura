@@ -19,7 +19,7 @@ const DynamicNavbar = computed(() => {
 </script>
 
 <template>
-  <div>
+  <div class="dark:bg-gray-900">
     <component :is="DynamicNavbar" />
     <NuxtPage />
     <Footer />

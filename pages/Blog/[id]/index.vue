@@ -11,7 +11,7 @@ const blogDetail = ref({
   excerpt: "Siswa SMKN 1 ARAHAN mengikuti kegiatan P5 dengan tema kewirausahaan dan karya rekayasa teknologi...",
   content: `
     <p>SMKN 1 ARAHAN baru-baru ini melaksanakan kegiatan Projek Penguatan Profil Pelajar Pancasila (P5) yang merupakan bagian dari implementasi Kurikulum Merdeka. Kegiatan ini berlangsung selama dua minggu dengan melibatkan seluruh siswa kelas X dan XI.</p>
-    
+
     <h3>Tema Kegiatan</h3>
     <p>Tahun ini, sekolah mengangkat dua tema utama:</p>
     <ul>
@@ -105,12 +105,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="min-h-screen pt-20 pb-16">
+  <main class="min-h-screen pt-20 pb-16 bg-white dark:bg-gray-900 transition-colors duration-200">
     <!-- Header dengan Breadcrumb -->
     <div class="border-b border-gray-100 dark:border-gray-800">
       <div class="max-w-4xl mx-auto px-4 py-8">
         <!-- Breadcrumb -->
-        <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500 mb-4">
+        <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-4">
           <NuxtLink to="/" class="hover:text-amber-600 dark:hover:text-amber-400 transition-colors">Beranda</NuxtLink>
           <span>/</span>
           <NuxtLink to="/blog" class="hover:text-amber-600 dark:hover:text-amber-400 transition-colors">Blog</NuxtLink>
@@ -132,7 +132,7 @@ onMounted(() => {
         </h1>
 
         <!-- Meta Info -->
-        <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-500">
+        <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
           <div class="flex items-center gap-2">
             <img :src="blogDetail.author.avatar" :alt="blogDetail.author.name" class="w-8 h-8 rounded-full" />
             <span>{{ blogDetail.author.name }}</span>
@@ -163,9 +163,9 @@ onMounted(() => {
           <!-- Tags -->
           <div class="mt-8 pt-6 border-t border-gray-100 dark:border-gray-800">
             <div class="flex flex-wrap items-center gap-2">
-              <span class="text-sm text-gray-500 dark:text-gray-500">Tags:</span>
+              <span class="text-sm text-gray-500 dark:text-gray-400">Tags:</span>
               <NuxtLink v-for="tag in blogDetail.tags" :key="tag" :to="`/blog?tag=${tag.toLowerCase()}`"
-                class="px-3 py-1 text-xs border border-gray-200 dark:border-gray-700 rounded-full hover:border-amber-500 hover:text-amber-600 dark:hover:border-amber-400 transition-colors">
+                class="px-3 py-1 text-xs dark:text-gray-400 border border-gray-200 dark:border-gray-700 rounded-full hover:border-amber-500 hover:text-amber-600 dark:hover:border-amber-400 transition-colors">
                 #{{ tag }}
               </NuxtLink>
             </div>
@@ -173,7 +173,7 @@ onMounted(() => {
 
           <!-- Share Buttons -->
           <div class="mt-6 flex items-center gap-4">
-            <span class="text-sm text-gray-500 dark:text-gray-500">Bagikan:</span>
+            <span class="text-sm text-gray-500 dark:text-gray-400">Bagikan:</span>
             <button class="text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path
@@ -195,7 +195,8 @@ onMounted(() => {
           </div>
 
           <!-- Author Bio -->
-          <div class="mt-8 p-6 bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800 rounded-md">
+          <div
+            class="mt-8 p-6 bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800 rounded-md transition-colors duration-200">
             <div class="flex items-start gap-4">
               <img :src="blogDetail.author.avatar" :alt="blogDetail.author.name" class="w-12 h-12 rounded-full" />
               <div>
@@ -208,7 +209,7 @@ onMounted(() => {
           <!-- Comments Section -->
           <div class="mt-8">
             <button @click="showComments = !showComments"
-              class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 mb-4">
+              class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 mb-4 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
               <span>Komentar ({{ comments.length }})</span>
               <svg class="w-4 h-4 transition-transform duration-200" :class="{ 'rotate-180': showComments }" fill="none"
                 stroke="currentColor" viewBox="0 0 24 24">
@@ -223,10 +224,10 @@ onMounted(() => {
                   class="w-8 h-8 rounded-full" />
                 <div class="flex-1">
                   <textarea v-model="newComment" rows="2" placeholder="Tulis komentar..."
-                    class="w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors"></textarea>
+                    class="w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 transition-colors"></textarea>
                   <div class="flex justify-end mt-2">
                     <button
-                      class="px-3 py-1 text-xs text-white bg-amber-500 rounded-md hover:bg-amber-600 transition-colors">
+                      class="px-3 py-1 text-xs text-white bg-amber-500 rounded-md hover:bg-amber-600 dark:bg-amber-600 dark:hover:bg-amber-700 transition-colors">
                       Kirim
                     </button>
                   </div>
@@ -240,19 +241,20 @@ onMounted(() => {
                 <div class="flex-1">
                   <div class="flex items-center gap-2 mb-1">
                     <span class="font-medium text-sm text-gray-900 dark:text-white">{{ comment.name }}</span>
-                    <span class="text-xs text-gray-500 dark:text-gray-500">{{ comment.date }}</span>
+                    <span class="text-xs text-gray-500 dark:text-gray-400">{{ comment.date }}</span>
                   </div>
                   <p class="text-sm text-gray-700 dark:text-gray-300 mb-2">{{ comment.comment }}</p>
                   <div class="flex items-center gap-4">
                     <button
-                      class="flex items-center gap-1 text-xs text-gray-500 hover:text-amber-600 dark:hover:text-amber-400">
+                      class="flex items-center gap-1 text-xs text-gray-500 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
                       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                           d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                       </svg>
                       <span>{{ comment.likes }}</span>
                     </button>
-                    <button class="text-xs text-gray-500 hover:text-amber-600 dark:hover:text-amber-400">Balas</button>
+                    <button
+                      class="text-xs text-gray-500 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">Balas</button>
                   </div>
                 </div>
               </div>
@@ -262,8 +264,9 @@ onMounted(() => {
 
         <!-- Sidebar -->
         <div class="lg:col-span-1">
-          <!-- Table of Contents (untuk artikel panjang) -->
-          <div class="border border-gray-100 dark:border-gray-800 rounded-md overflow-hidden sticky top-24">
+          <!-- Table of Contents -->
+          <div
+            class="border border-gray-100 dark:border-gray-800 rounded-md overflow-hidden sticky top-24 transition-colors duration-200">
             <div class="p-3 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-800">
               <h3 class="font-medium text-gray-900 dark:text-white text-sm">Daftar Isi</h3>
             </div>
@@ -271,16 +274,16 @@ onMounted(() => {
               <ul class="space-y-2 text-sm">
                 <li>
                   <a href="#"
-                    class="text-gray-600 hover:text-amber-600 dark:text-gray-400 dark:hover:text-amber-400">Tema
+                    class="text-gray-600 hover:text-amber-600 dark:text-gray-400 dark:hover:text-amber-400 transition-colors">Tema
                     Kegiatan</a>
                 </li>
                 <li>
                   <a href="#"
-                    class="text-gray-600 hover:text-amber-600 dark:text-gray-400 dark:hover:text-amber-400">Pelaksanaan</a>
+                    class="text-gray-600 hover:text-amber-600 dark:text-gray-400 dark:hover:text-amber-400 transition-colors">Pelaksanaan</a>
                 </li>
                 <li>
                   <a href="#"
-                    class="text-gray-600 hover:text-amber-600 dark:text-gray-400 dark:hover:text-amber-400">Hasil
+                    class="text-gray-600 hover:text-amber-600 dark:text-gray-400 dark:hover:text-amber-400 transition-colors">Hasil
                     Karya</a>
                 </li>
               </ul>
@@ -297,13 +300,13 @@ onMounted(() => {
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <NuxtLink v-for="post in blogDetail.relatedPosts" :key="post.id" :to="`/blog/${post.id}`"
-            class="group block border border-gray-100 dark:border-gray-800 rounded-md overflow-hidden hover:border-amber-200 dark:hover:border-amber-900 transition-colors">
+            class="group block border border-gray-100 dark:border-gray-800 rounded-md overflow-hidden hover:border-amber-200 dark:hover:border-amber-900 transition-all duration-200 hover:shadow-sm">
             <div class="h-40 overflow-hidden">
               <img :src="post.image" :alt="post.title"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
             </div>
             <div class="p-3">
-              <p class="text-xs text-gray-500 dark:text-gray-500 mb-1">{{ post.date }}</p>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">{{ post.date }}</p>
               <h3 class="text-sm font-medium text-gray-900 dark:text-white line-clamp-2">{{ post.title }}</h3>
             </div>
           </NuxtLink>

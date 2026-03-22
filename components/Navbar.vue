@@ -85,7 +85,7 @@ onMounted(() => {
 
 <template>
   <!-- Navbar - Minimalis tanpa border bottom -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 px-4">
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 px-4 transition-colors duration-200">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
       <NuxtLink to="/" class="flex items-center gap-2">

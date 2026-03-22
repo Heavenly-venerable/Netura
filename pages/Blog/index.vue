@@ -149,7 +149,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="min-h-screen pt-20 pb-16">
+  <main class="min-h-screen pt-20 pb-16 bg-white dark:bg-gray-900 transition-colors duration-200">
     <!-- Header Section -->
     <div class="border-b border-gray-100 dark:border-gray-800">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 text-center">
@@ -256,7 +256,7 @@ onMounted(() => {
         <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto">
           <div class="relative flex-1 sm:w-72">
             <input v-model="searchQuery" type="text" placeholder="Cari artikel..."
-              class="w-full px-4 py-2 pl-10 text-sm border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors" />
+              class="w-full px-4 py-2 pl-10 text-sm border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 transition-colors" />
             <svg class="absolute left-3 top-2.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
               viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -265,7 +265,7 @@ onMounted(() => {
           </div>
 
           <select v-model="sortBy"
-            class="px-4 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors">
+            class="px-4 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 transition-colors">
             <option value="terbaru">📅 Terbaru</option>
             <option value="terpopuler">🔥 Terpopuler</option>
           </select>
@@ -274,11 +274,11 @@ onMounted(() => {
 
       <!-- Results Info -->
       <div class="flex items-center justify-between mb-6">
-        <p class="text-sm text-gray-500 dark:text-gray-500">
+        <p class="text-sm text-gray-500 dark:text-gray-400">
           Menampilkan <span class="font-medium text-gray-700 dark:text-gray-300">{{ paginatedBlogs.length }}</span> dari
           <span class="font-medium text-gray-700 dark:text-gray-300">{{ filteredBlogs.length }}</span> artikel
         </p>
-        <p class="text-sm text-gray-500 dark:text-gray-500">
+        <p class="text-sm text-gray-500 dark:text-gray-400">
           Halaman {{ currentPage }} dari {{ totalPages }}
         </p>
       </div>
@@ -309,7 +309,7 @@ onMounted(() => {
 
           <!-- Content -->
           <div class="p-5">
-            <div class="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-500 mb-3">
+            <div class="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400 mb-3">
               <span class="flex items-center gap-1">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -389,15 +389,15 @@ onMounted(() => {
             d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
         </svg>
         <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-2">Tidak ada artikel</h3>
-        <p class="text-base text-gray-500 dark:text-gray-500">Coba ubah filter atau kata kunci pencarian Anda</p>
+        <p class="text-base text-gray-500 dark:text-gray-400">Coba ubah filter atau kata kunci pencarian Anda</p>
       </div>
     </div>
 
-    <!-- Newsletter Sectio -->
+    <!-- Newsletter Section -->
     <div class="border-t border-gray-100 dark:border-gray-800 mt-8">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div
-          class="bg-gradient-to-br from-amber-50 to-amber-100/50 dark:from-amber-900/20 dark:to-amber-800/10 rounded-2xl p-8 md:p-10 border border-amber-200 dark:border-amber-800">
+          class="bg-gradient-to-br from-amber-50 to-amber-100/50 dark:from-amber-900/20 dark:to-amber-800/10 rounded-2xl p-8 md:p-10 border border-amber-200 dark:border-amber-800 transition-colors duration-200">
           <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
             <!-- Left Content -->
             <div class="flex items-start gap-4 max-w-xl">
@@ -420,7 +420,7 @@ onMounted(() => {
               </div>
             </div>
 
-            <!-- Newsletter Form - Fixed width dan alignment -->
+            <!-- Newsletter Form -->
             <div class="w-full lg:w-[400px] flex-shrink-0">
               <div class="flex flex-col sm:flex-row gap-3">
                 <div class="flex-1">
@@ -432,7 +432,7 @@ onMounted(() => {
                   Langganan
                 </button>
               </div>
-              <p class="text-xs text-gray-500 dark:text-gray-500 mt-2">
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">
                 * Gratis, berhenti kapan saja
               </p>
             </div>

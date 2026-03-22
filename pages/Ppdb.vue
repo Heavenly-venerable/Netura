@@ -75,12 +75,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="min-h-screen pt-20 pb-16">
+  <main class="min-h-screen pt-20 pb-16 bg-white dark:bg-gray-900 transition-colors duration-200">
     <!-- Header Section -->
     <div class="border-b border-gray-100 dark:border-gray-800">
       <div class="max-w-3xl mx-auto px-4 py-12 md:py-16">
         <!-- Breadcrumb -->
-        <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500 mb-4">
+        <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-4">
           <NuxtLink to="/" class="hover:text-amber-600 dark:hover:text-amber-400 transition-colors">Beranda</NuxtLink>
           <span>/</span>
           <NuxtLink to="/syarat-ppdb" class="hover:text-amber-600 dark:hover:text-amber-400 transition-colors">PPDB
@@ -104,24 +104,25 @@ onMounted(() => {
       <div class="flex items-center justify-between mb-8">
         <div v-for="step in totalSteps" :key="step" class="flex items-center flex-1 last:flex-none">
           <div class="flex items-center" :class="{ 'w-full': step < totalSteps }">
-            <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm" :class="{
-              'bg-amber-500 text-white': currentStep >= step,
-              'border-2 border-gray-200 dark:border-gray-700 text-gray-400': currentStep < step
-            }">
+            <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm transition-colors duration-200"
+              :class="{
+                'bg-amber-500 text-white': currentStep >= step,
+                'border-2 border-gray-200 dark:border-gray-700 text-gray-400': currentStep < step
+              }">
               {{ step }}
             </div>
-            <div v-if="step < totalSteps" class="flex-1 h-0.5 mx-2" :class="{
+            <div v-if="step < totalSteps" class="flex-1 h-0.5 mx-2 transition-colors duration-200" :class="{
               'bg-amber-500': currentStep > step,
               'bg-gray-200 dark:bg-gray-700': currentStep <= step
             }"></div>
           </div>
         </div>
       </div>
-      <p class="text-center text-sm text-gray-500 dark:text-gray-500 mb-8">
+      <p class="text-center text-sm text-gray-500 dark:text-gray-400 mb-8">
         Langkah {{ currentStep }} dari {{ totalSteps }}:
-        <span v-if="currentStep === 1">Data Pribadi</span>
-        <span v-else-if="currentStep === 2">Data Domisili & Orang Tua</span>
-        <span v-else>Kontak & Verifikasi</span>
+        <span v-if="currentStep === 1" class="text-gray-700 dark:text-gray-300">Data Pribadi</span>
+        <span v-else-if="currentStep === 2" class="text-gray-700 dark:text-gray-300">Data Domisili & Orang Tua</span>
+        <span v-else class="text-gray-700 dark:text-gray-300">Kontak & Verifikasi</span>
       </p>
     </div>
 
@@ -130,7 +131,8 @@ onMounted(() => {
       <form @submit.prevent="submitForm" class="space-y-6">
         <!-- Step 1: Data Pribadi -->
         <div v-if="currentStep === 1" class="space-y-6">
-          <div class="p-6 bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800 rounded-md">
+          <div
+            class="p-6 bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800 rounded-md transition-colors duration-200">
             <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <span class="w-1 h-5 bg-amber-500 rounded-full"></span>
               Data Pendaftaran
@@ -143,7 +145,7 @@ onMounted(() => {
                   Jenis Pendaftaran <span class="text-red-500">*</span>
                 </label>
                 <select v-model="formData.jenisPendaftaran"
-                  class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors"
+                  class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors"
                   required>
                   <option value="" disabled selected>Pilih jenis pendaftaran</option>
                   <option v-for="item in jenisPendaftaran" :key="item.value" :value="item.value">
@@ -158,7 +160,7 @@ onMounted(() => {
                   Jalur Pendaftaran <span class="text-red-500">*</span>
                 </label>
                 <select v-model="formData.jalurPendaftaran"
-                  class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors"
+                  class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors"
                   required>
                   <option value="" disabled selected>Pilih jalur pendaftaran</option>
                   <option v-for="item in jalurPendaftaran" :key="item.value" :value="item.value">
@@ -169,7 +171,8 @@ onMounted(() => {
             </div>
           </div>
 
-          <div class="p-6 bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800 rounded-md">
+          <div
+            class="p-6 bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800 rounded-md transition-colors duration-200">
             <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <span class="w-1 h-5 bg-amber-500 rounded-full"></span>
               Identitas Diri
@@ -182,9 +185,9 @@ onMounted(() => {
                   Nama Lengkap <span class="text-red-500">*</span>
                 </label>
                 <input v-model="formData.namaLengkap" type="text" placeholder="Sesuai akta kelahiran"
-                  class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors"
+                  class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors"
                   required />
-                <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
                   Nama harus sesuai dengan dokumen resmi (Akta/Ijazah)
                 </p>
               </div>
@@ -195,9 +198,10 @@ onMounted(() => {
                   Jenis Kelamin <span class="text-red-500">*</span>
                 </label>
                 <div class="flex gap-4">
-                  <label v-for="jk in jenisKelamin" :key="jk.value" class="flex items-center gap-2">
+                  <label v-for="jk in jenisKelamin" :key="jk.value" class="flex items-center gap-2 cursor-pointer">
                     <input type="radio" :value="jk.value" v-model="formData.jenisKelamin"
-                      class="w-4 h-4 text-amber-500 border-gray-300 focus:ring-amber-500" required />
+                      class="w-4 h-4 text-amber-500 border-gray-300 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-700"
+                      required />
                     <span class="text-sm text-gray-700 dark:text-gray-300">{{ jk.label }}</span>
                   </label>
                 </div>
@@ -210,7 +214,7 @@ onMounted(() => {
                     Tempat Lahir <span class="text-red-500">*</span>
                   </label>
                   <input v-model="formData.tempatLahir" type="text" placeholder="Kota lahir"
-                    class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors"
+                    class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors"
                     required />
                 </div>
                 <div>
@@ -218,7 +222,7 @@ onMounted(() => {
                     Tanggal Lahir <span class="text-red-500">*</span>
                   </label>
                   <input v-model="formData.tanggalLahir" type="date"
-                    class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors"
+                    class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors"
                     required />
                 </div>
               </div>
@@ -230,14 +234,14 @@ onMounted(() => {
                     NISN
                   </label>
                   <input v-model="formData.nisn" type="text" placeholder="Nomor Induk Siswa Nasional"
-                    class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors" />
+                    class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors" />
                 </div>
                 <div>
                   <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     NIK <span class="text-red-500">*</span>
                   </label>
                   <input v-model="formData.nik" type="text" placeholder="Nomor Induk Kependudukan"
-                    class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors"
+                    class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors"
                     required />
                 </div>
               </div>
@@ -248,7 +252,7 @@ onMounted(() => {
                   Asal Sekolah <span class="text-red-500">*</span>
                 </label>
                 <input v-model="formData.asalSekolah" type="text" placeholder="Nama SMP/MTs asal"
-                  class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors"
+                  class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors"
                   required />
               </div>
             </div>
@@ -257,7 +261,8 @@ onMounted(() => {
 
         <!-- Step 2: Data Domisili & Orang Tua -->
         <div v-if="currentStep === 2" class="space-y-6">
-          <div class="p-6 bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800 rounded-md">
+          <div
+            class="p-6 bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800 rounded-md transition-colors duration-200">
             <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <span class="w-1 h-5 bg-amber-500 rounded-full"></span>
               Alamat Domisili
@@ -270,7 +275,7 @@ onMounted(() => {
                     Kabupaten/Kota <span class="text-red-500">*</span>
                   </label>
                   <input v-model="formData.kabupatenKota" type="text" placeholder="Kabupaten"
-                    class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors"
+                    class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors"
                     required />
                 </div>
                 <div>
@@ -278,7 +283,7 @@ onMounted(() => {
                     Kecamatan <span class="text-red-500">*</span>
                   </label>
                   <input v-model="formData.kecamatan" type="text" placeholder="Kecamatan"
-                    class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors"
+                    class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors"
                     required />
                 </div>
               </div>
@@ -288,7 +293,7 @@ onMounted(() => {
                   Desa/Kelurahan <span class="text-red-500">*</span>
                 </label>
                 <input v-model="formData.desaKelurahan" type="text" placeholder="Desa/Kelurahan"
-                  class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors"
+                  class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors"
                   required />
               </div>
 
@@ -297,13 +302,14 @@ onMounted(() => {
                   Alamat Lengkap <span class="text-red-500">*</span>
                 </label>
                 <textarea v-model="formData.alamat" rows="3" placeholder="Rt/Rw, Nama jalan, No rumah"
-                  class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors"
+                  class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors"
                   required></textarea>
               </div>
             </div>
           </div>
 
-          <div class="p-6 bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800 rounded-md">
+          <div
+            class="p-6 bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800 rounded-md transition-colors duration-200">
             <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <span class="w-1 h-5 bg-amber-500 rounded-full"></span>
               Data Orang Tua
@@ -316,7 +322,7 @@ onMounted(() => {
                     Nama Ayah <span class="text-red-500">*</span>
                   </label>
                   <input v-model="formData.namaAyah" type="text" placeholder="Nama lengkap ayah"
-                    class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors"
+                    class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors"
                     required />
                 </div>
                 <div>
@@ -324,7 +330,7 @@ onMounted(() => {
                     Nama Ibu <span class="text-red-500">*</span>
                   </label>
                   <input v-model="formData.namaIbu" type="text" placeholder="Nama lengkap ibu"
-                    class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors"
+                    class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors"
                     required />
                 </div>
               </div>
@@ -334,7 +340,8 @@ onMounted(() => {
 
         <!-- Step 3: Kontak & Verifikasi -->
         <div v-if="currentStep === 3" class="space-y-6">
-          <div class="p-6 bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800 rounded-md">
+          <div
+            class="p-6 bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800 rounded-md transition-colors duration-200">
             <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <span class="w-1 h-5 bg-amber-500 rounded-full"></span>
               Kontak & Verifikasi
@@ -346,9 +353,9 @@ onMounted(() => {
                   Nomor HP/WhatsApp <span class="text-red-500">*</span>
                 </label>
                 <input v-model="formData.noHp" type="tel" placeholder="081234567890"
-                  class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors"
+                  class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors"
                   required />
-                <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
                   Nomor yang bisa dihubungi untuk informasi lebih lanjut
                 </p>
               </div>
@@ -358,13 +365,14 @@ onMounted(() => {
                   Email
                 </label>
                 <input v-model="formData.email" type="email" placeholder="nama@email.com"
-                  class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors" />
+                  class="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 dark:focus:ring-amber-400 transition-colors" />
               </div>
 
               <div class="flex items-start gap-3 pt-4">
                 <input type="checkbox" v-model="checkbox" id="agreement"
-                  class="mt-1 w-4 h-4 text-amber-500 border-gray-300 rounded focus:ring-amber-500" required />
-                <label for="agreement" class="text-sm text-gray-600 dark:text-gray-400">
+                  class="mt-1 w-4 h-4 text-amber-500 border-gray-300 rounded focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-700"
+                  required />
+                <label for="agreement" class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                   Saya menyatakan bahwa data yang saya isi adalah benar dan dapat
                   dipertanggungjawabkan. Jika dikemudian hari ditemukan ketidaksesuaian,
                   saya bersedia menerima sanksi sesuai ketentuan yang berlaku.
@@ -375,10 +383,10 @@ onMounted(() => {
 
           <!-- Summary Card -->
           <div
-            class="p-4 bg-amber-50/50 dark:bg-amber-900/10 border border-amber-100 dark:border-amber-900/30 rounded-md">
+            class="p-4 bg-amber-50/50 dark:bg-amber-900/10 border border-amber-100 dark:border-amber-900/30 rounded-md transition-colors duration-200">
             <h3 class="font-medium text-amber-800 dark:text-amber-300 mb-2">Ringkasan Pendaftaran</h3>
             <p class="text-sm text-amber-700 dark:text-amber-400">
-              Jalur: {{ formData.jalurPendaftaran }} • Nama: {{ formData.namaLengkap }}
+              Jalur: {{ formData.jalurPendaftaran || '-' }} • Nama: {{ formData.namaLengkap || '-' }}
             </p>
             <p class="text-xs text-amber-600 dark:text-amber-500 mt-2">
               Pastikan semua data sudah benar sebelum mengirimkan formulir

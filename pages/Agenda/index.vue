@@ -127,7 +127,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="min-h-screen pt-20 pb-16">
+  <main class="min-h-screen pt-20 pb-16 bg-white dark:bg-gray-900 transition-colors duration-200">
     <!-- Header Section -->
     <div class="border-b border-gray-100 dark:border-gray-800">
       <div class="max-w-6xl mx-auto px-4 py-12 md:py-16 text-center">
@@ -164,11 +164,11 @@ onMounted(() => {
           </button>
         </div>
 
-        <!-- Search -->
+        <!-- Search & Status -->
         <div class="flex items-center gap-3 w-full lg:w-auto">
           <div class="relative flex-1 lg:w-64">
             <input v-model="searchQuery" type="text" placeholder="Cari agenda..."
-              class="w-full px-3 py-1.5 pl-8 text-sm border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors" />
+              class="w-full px-3 py-1.5 pl-8 text-sm border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 transition-colors" />
             <svg class="absolute left-2.5 top-2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
               viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -178,7 +178,7 @@ onMounted(() => {
 
           <!-- Status Filter -->
           <select v-model="selectedStatus"
-            class="px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors">
+            class="px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 transition-colors">
             <option value="Semua">Semua Status</option>
             <option value="akan-datang">Akan Datang</option>
             <option value="sedang-berlangsung">Sedang Berlangsung</option>
@@ -188,7 +188,7 @@ onMounted(() => {
       </div>
 
       <!-- Results Info -->
-      <div class="flex items-center gap-2 mb-6 text-sm text-gray-500 dark:text-gray-500">
+      <div class="flex items-center gap-2 mb-6 text-sm text-gray-500 dark:text-gray-400">
         <span>Menampilkan {{ filteredAgendas.length }} dari {{ agendas.length }} agenda</span>
       </div>
     </div>
@@ -197,7 +197,7 @@ onMounted(() => {
     <div class="max-w-6xl mx-auto px-4 pb-12">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <NuxtLink v-for="item in filteredAgendas" :key="item.id" :to="`/agenda/${item.id}`"
-          class="group block border border-gray-100 dark:border-gray-800 rounded-md overflow-hidden hover:border-amber-200 dark:hover:border-amber-900 transition-colors">
+          class="group block border border-gray-100 dark:border-gray-800 rounded-md overflow-hidden hover:border-amber-200 dark:hover:border-amber-900 transition-all duration-200 hover:translate-y-[-2px]">
           <!-- Image -->
           <div class="relative h-48 overflow-hidden bg-gray-100 dark:bg-gray-800">
             <img :src="item.image" :alt="item.title"
@@ -254,7 +254,7 @@ onMounted(() => {
             </p>
 
             <!-- Location & Participants -->
-            <div class="space-y-1 text-xs text-gray-500 dark:text-gray-500">
+            <div class="space-y-1 text-xs text-gray-500 dark:text-gray-400">
               <div class="flex items-center gap-2">
                 <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -284,14 +284,14 @@ onMounted(() => {
             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
         <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Tidak ada agenda</h3>
-        <p class="text-sm text-gray-500 dark:text-gray-500">Coba ubah filter atau kata kunci pencarian Anda</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Coba ubah filter atau kata kunci pencarian Anda</p>
       </div>
     </div>
 
     <!-- Calendar Preview -->
     <div class="border-t border-gray-100 dark:border-gray-800">
       <div class="max-w-6xl mx-auto px-4 py-8">
-        <div class="bg-gray-50 dark:bg-gray-800/50 rounded-md p-6 border border-gray-100 dark:border-gray-800">
+        <div class="bg-gray-50 dark:bg-gray-800/50 rounded-md p-6 border border-gray-100 dark:border-gray-800 transition-colors duration-200">
           <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
@@ -314,13 +314,13 @@ onMounted(() => {
 
           <!-- Mini Calendar Preview -->
           <div class="grid grid-cols-7 gap-1 text-center text-xs">
-            <div class="py-2 text-gray-500 dark:text-gray-500">Sen</div>
-            <div class="py-2 text-gray-500 dark:text-gray-500">Sel</div>
-            <div class="py-2 text-gray-500 dark:text-gray-500">Rab</div>
-            <div class="py-2 text-gray-500 dark:text-gray-500">Kam</div>
-            <div class="py-2 text-gray-500 dark:text-gray-500">Jum</div>
-            <div class="py-2 text-gray-500 dark:text-gray-500">Sab</div>
-            <div class="py-2 text-gray-500 dark:text-gray-500">Min</div>
+            <div class="py-2 text-gray-500 dark:text-gray-400">Sen</div>
+            <div class="py-2 text-gray-500 dark:text-gray-400">Sel</div>
+            <div class="py-2 text-gray-500 dark:text-gray-400">Rab</div>
+            <div class="py-2 text-gray-500 dark:text-gray-400">Kam</div>
+            <div class="py-2 text-gray-500 dark:text-gray-400">Jum</div>
+            <div class="py-2 text-gray-500 dark:text-gray-400">Sab</div>
+            <div class="py-2 text-gray-500 dark:text-gray-400">Min</div>
 
             <div class="py-2 text-gray-400 dark:text-gray-600">29</div>
             <div class="py-2 text-gray-400 dark:text-gray-600">30</div>

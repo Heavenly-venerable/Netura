@@ -124,7 +124,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="min-h-screen pt-20 pb-16">
+  <main class="min-h-screen pt-20 pb-16 bg-white dark:bg-gray-900 transition-colors duration-200">
     <!-- Header Section -->
     <div class="border-b border-gray-100 dark:border-gray-800">
       <div class="max-w-6xl mx-auto px-4 py-12 md:py-16 text-center">
@@ -164,7 +164,7 @@ onMounted(() => {
         <!-- Search -->
         <div class="relative w-full md:w-64">
           <input v-model="searchQuery" type="text" placeholder="Cari ekstrakulikuler..."
-            class="w-full px-3 py-1.5 pl-8 text-sm border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 transition-colors" />
+            class="w-full px-3 py-1.5 pl-8 text-sm border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-amber-400 focus:ring-1 focus:ring-amber-500 transition-colors" />
           <svg class="absolute left-2.5 top-2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
             viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -174,10 +174,10 @@ onMounted(() => {
       </div>
 
       <!-- Stats -->
-      <div class="flex items-center gap-2 mb-6 text-sm text-gray-500 dark:text-gray-500">
+      <div class="flex items-center gap-2 mb-6 text-sm text-gray-500 dark:text-gray-400">
         <span>Menampilkan {{ filteredExtracurriculars.length }} dari {{ extracurriculars.length }}
           ekstrakulikuler</span>
-        <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+        <span class="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-600"></span>
         <span>Total {{extracurriculars.reduce((acc, curr) => acc + curr.members, 0)}} siswa aktif</span>
       </div>
     </div>
@@ -186,7 +186,7 @@ onMounted(() => {
     <div class="max-w-6xl mx-auto px-4 pb-12">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div v-for="item in filteredExtracurriculars" :key="item.id"
-          class="group border border-gray-100 dark:border-gray-800 rounded-md overflow-hidden hover:border-amber-200 dark:hover:border-amber-900 transition-colors">
+          class="group border border-gray-100 dark:border-gray-800 rounded-md overflow-hidden hover:border-amber-200 dark:hover:border-amber-900 transition-all duration-200 hover:translate-y-[-2px]">
           <!-- Image -->
           <div class="relative h-48 overflow-hidden bg-gray-100 dark:bg-gray-800">
             <img :src="item.image" :alt="item.name"
@@ -219,14 +219,14 @@ onMounted(() => {
 
             <!-- Schedule & Coach -->
             <div class="space-y-2 mb-3 text-xs">
-              <div class="flex items-center gap-2 text-gray-500 dark:text-gray-500">
+              <div class="flex items-center gap-2 text-gray-500 dark:text-gray-400">
                 <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <span class="truncate">{{ item.schedule }}</span>
               </div>
-              <div class="flex items-center gap-2 text-gray-500 dark:text-gray-500">
+              <div class="flex items-center gap-2 text-gray-500 dark:text-gray-400">
                 <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -243,7 +243,7 @@ onMounted(() => {
                   class="text-xs bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded-full">
                   {{ achievement }}
                 </span>
-                <span v-if="item.achievements.length > 2" class="text-xs text-gray-500 dark:text-gray-500">
+                <span v-if="item.achievements.length > 2" class="text-xs text-gray-500 dark:text-gray-400">
                   +{{ item.achievements.length - 2 }} lagi
                 </span>
               </div>
@@ -268,7 +268,7 @@ onMounted(() => {
             d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Tidak ada ekstrakulikuler</h3>
-        <p class="text-sm text-gray-500 dark:text-gray-500">Coba ubah filter atau kata kunci pencarian Anda</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Coba ubah filter atau kata kunci pencarian Anda</p>
       </div>
     </div>
 
@@ -276,7 +276,7 @@ onMounted(() => {
     <div class="border-t border-gray-100 dark:border-gray-800">
       <div class="max-w-6xl mx-auto px-4 py-8">
         <div
-          class="bg-amber-50/50 dark:bg-amber-900/10 rounded-md p-6 border border-amber-100 dark:border-amber-900/30">
+          class="bg-amber-50/50 dark:bg-amber-900/10 rounded-md p-6 border border-amber-100 dark:border-amber-900/30 transition-colors duration-200">
           <div class="flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">

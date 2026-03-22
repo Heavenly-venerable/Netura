@@ -55,11 +55,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="min-h-screen pt-20 pb-16">
+  <main class="min-h-screen pt-20 pb-16 bg-white dark:bg-gray-900 transition-colors duration-200">
     <!-- Hero Section dengan Image -->
     <div class="relative h-64 md:h-80 bg-gray-900 overflow-hidden">
-      <img src="https://images.unsplash.com/photo-1494949649109-ecfc3b8c35df?q=80&w=1032&auto=format&fit=crop"
-        alt="Gedung SMKN 1 ARAHAN" class="w-full h-full object-cover opacity-60" />
+      <img 
+        src="https://images.unsplash.com/photo-1494949649109-ecfc3b8c35df?q=80&w=1032&auto=format&fit=crop"
+        alt="Gedung SMKN 1 ARAHAN" 
+        class="w-full h-full object-cover opacity-60" 
+      />
       <div class="absolute inset-0 flex items-center justify-center">
         <div class="text-center text-white px-4">
           <h1 class="text-3xl md:text-4xl font-light mb-2">
@@ -81,23 +84,18 @@ onMounted(() => {
           Awal Mula Berdirinya
         </h2>
 
-        <div
-          class="prose prose-sm sm:prose-base dark:prose-invert max-w-none space-y-4 text-gray-700 dark:text-gray-300">
+        <div class="prose prose-sm sm:prose-base dark:prose-invert max-w-none space-y-4 text-gray-700 dark:text-gray-300">
           <p>
-            SMKN 1 ARAHAN berdiri pada tanggal <span class="font-medium text-amber-600 dark:text-amber-400">17 Agustus
-              1995</span>
+            SMKN 1 ARAHAN berdiri pada tanggal <span class="font-medium text-amber-600 dark:text-amber-400">17 Agustus 1995</span>
             sebagai jawaban atas kebutuhan akan pendidikan kejuruan yang berkualitas di wilayah Kecamatan Arahan dan
-            sekitarnya.
-            Didirikan di atas lahan seluas 2,5 hektar, sekolah ini memulai perjalanannya dengan 3 program keahlian dan
+            sekitarnya. Didirikan di atas lahan seluas 2,5 hektar, sekolah ini memulai perjalanannya dengan 3 program keahlian dan
             120 siswa pertama.
           </p>
 
           <p>
             Pendirian sekolah ini digagas oleh tokoh masyarakat dan pemerintah daerah yang peduli akan masa depan
-            generasi muda.
-            Dengan semangat gotong royong, pembangunan gedung sekolah dilakukan secara bertahap. Awalnya hanya terdapat
-            6 ruang
-            kelas, 1 ruang guru, dan 1 ruang administrasi yang sederhana.
+            generasi muda. Dengan semangat gotong royong, pembangunan gedung sekolah dilakukan secara bertahap. Awalnya hanya terdapat
+            6 ruang kelas, 1 ruang guru, dan 1 ruang administrasi yang sederhana.
           </p>
 
           <div class="my-8 p-4 bg-amber-50/50 dark:bg-amber-900/10 border-l-4 border-amber-500 rounded-r-md">
@@ -113,10 +111,8 @@ onMounted(() => {
 
           <p>
             Tahun-tahun pertama perjalanan sekolah ini penuh dengan tantangan. Keterbatasan fasilitas dan peralatan
-            praktik
-            tidak menyurutkan semangat para guru dan siswa untuk terus belajar dan berkarya. Berkat dedikasi dan kerja
-            keras
-            semua pihak, SMKN 1 ARAHAN perlahan mulai dikenal sebagai sekolah kejuruan yang berkualitas di Kabupaten
+            praktik tidak menyurutkan semangat para guru dan siswa untuk terus belajar dan berkarya. Berkat dedikasi dan kerja
+            keras semua pihak, SMKN 1 ARAHAN perlahan mulai dikenal sebagai sekolah kejuruan yang berkualitas di Kabupaten
             Indramayu.
           </p>
         </div>
@@ -130,22 +126,23 @@ onMounted(() => {
         </h2>
 
         <div class="space-y-6">
-          <div v-for="(item, index) in timelineData" :key="index"
+          <div 
+            v-for="(item, index) in timelineData" 
+            :key="index"
             class="relative pl-8 pb-6 border-l-2 border-amber-200 dark:border-amber-900 last:border-l-0 last:pb-0"
-            :class="{ 'last:pl-0': index === timelineData.length - 1 }">
+            :class="{ 'last:pl-0': index === timelineData.length - 1 }"
+          >
             <!-- Timeline Dot -->
-            <div
-              class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-amber-500 border-2 border-white dark:border-gray-900">
+            <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-amber-500 border-2 border-white dark:border-gray-900">
             </div>
 
             <!-- Year Badge -->
-            <div
-              class="inline-block px-2 py-0.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 text-xs font-medium rounded mb-2">
+            <div class="inline-block px-2 py-0.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 text-xs font-medium rounded mb-2">
               {{ item.year }}
             </div>
 
             <!-- Content -->
-            <div class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-md border border-gray-100 dark:border-gray-800">
+            <div class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-md border border-gray-100 dark:border-gray-800 transition-colors duration-200">
               <h3 class="font-medium text-gray-900 dark:text-white mb-2">{{ item.title }}</h3>
               <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                 {{ item.description }}
@@ -163,19 +160,19 @@ onMounted(() => {
         </h2>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="text-center p-4 border border-gray-100 dark:border-gray-800 rounded-md">
+          <div class="text-center p-4 border border-gray-100 dark:border-gray-800 rounded-md transition-colors duration-200">
             <div class="text-2xl font-light text-amber-600 dark:text-amber-400 mb-1">28</div>
             <div class="text-xs text-gray-600 dark:text-gray-400">Tahun Berdiri</div>
           </div>
-          <div class="text-center p-4 border border-gray-100 dark:border-gray-800 rounded-md">
+          <div class="text-center p-4 border border-gray-100 dark:border-gray-800 rounded-md transition-colors duration-200">
             <div class="text-2xl font-light text-amber-600 dark:text-amber-400 mb-1">1.200+</div>
             <div class="text-xs text-gray-600 dark:text-gray-400">Siswa Aktif</div>
           </div>
-          <div class="text-center p-4 border border-gray-100 dark:border-gray-800 rounded-md">
+          <div class="text-center p-4 border border-gray-100 dark:border-gray-800 rounded-md transition-colors duration-200">
             <div class="text-2xl font-light text-amber-600 dark:text-amber-400 mb-1">3</div>
             <div class="text-xs text-gray-600 dark:text-gray-400">Program Keahlian</div>
           </div>
-          <div class="text-center p-4 border border-gray-100 dark:border-gray-800 rounded-md">
+          <div class="text-center p-4 border border-gray-100 dark:border-gray-800 rounded-md transition-colors duration-200">
             <div class="text-2xl font-light text-amber-600 dark:text-amber-400 mb-1">85+</div>
             <div class="text-xs text-gray-600 dark:text-gray-400">Tenaga Pendidik</div>
           </div>
@@ -190,19 +187,19 @@ onMounted(() => {
         </h2>
 
         <div class="space-y-3">
-          <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-800">
+          <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-800 transition-colors duration-200">
             <span class="text-sm text-gray-700 dark:text-gray-300">Drs. H. Ahmad Syamsuri</span>
             <span class="text-xs text-gray-500 dark:text-gray-500">1995 - 2003</span>
           </div>
-          <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-800">
+          <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-800 transition-colors duration-200">
             <span class="text-sm text-gray-700 dark:text-gray-300">Drs. H. Maman Suryaman, M.Pd.</span>
             <span class="text-xs text-gray-500 dark:text-gray-500">2003 - 2011</span>
           </div>
-          <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-800">
+          <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-800 transition-colors duration-200">
             <span class="text-sm text-gray-700 dark:text-gray-300">Hj. Siti Aminah, S.Pd., M.M.</span>
             <span class="text-xs text-gray-500 dark:text-gray-500">2011 - 2019</span>
           </div>
-          <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-800">
+          <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-800 transition-colors duration-200">
             <span class="text-sm text-gray-700 dark:text-gray-300">Drs. H. Ahmad Fauzi, M.Pd.</span>
             <span class="text-xs text-gray-500 dark:text-gray-500">2019 - Sekarang</span>
           </div>
@@ -232,5 +229,10 @@ onMounted(() => {
 /* Custom prose */
 .prose p {
   @apply leading-relaxed;
+}
+
+/* Smooth transitions for all elements */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 </style>
